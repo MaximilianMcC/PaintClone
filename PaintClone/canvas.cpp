@@ -1,13 +1,16 @@
 #include "canvas.h"
 
-Canvas::Canvas() : renderTexture({800, 600})
+//? cpp you gotta redefine static things for some reason
+sf::Vector2u Canvas::size;
+sf::RenderTexture Canvas::renderTexture;
+
+void Canvas::Start()
 {
-	// Finish setting up the render texture (i lowk hate cpp)
-	renderTexture.clear(sf::Color::White);
-	renderTexture.display();
+	SetSize(100, 100);
+	renderTexture = sf::RenderTexture(GetSize());
 }
 
-void Canvas::TempUpdate(sf::RenderWindow& window)
+void Canvas::Update(float deltaTime, sf::RenderWindow& window)
 {
 	float bruhSize = 30;
 	sf::Color bruhColor = sf::Color::Black;
