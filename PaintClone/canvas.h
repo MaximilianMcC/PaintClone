@@ -7,6 +7,7 @@ class Canvas
 private:
 	static sf::Vector2u size;
 	static sf::RenderTexture renderTexture;
+	static float zoom;
 
 public:
 	static void Start();
@@ -23,9 +24,20 @@ public:
 	{
 		// TODO: Use ctor
 		size = sf::Vector2u(newWidth, newHeight);
-	};
+	}
 	static void SetSize(sf::Vector2u newSize)
 	{
 		size = newSize;
-	};
+	}
+
+	// Zoom getters and setters
+	// TODO: Don't wite in H
+	static float GetZoom()
+	{
+		return zoom;
+	}
+	static void SetZoom(float newZoom)
+	{
+		zoom = newZoom;
+	}
 };

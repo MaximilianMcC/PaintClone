@@ -3,11 +3,12 @@
 //? cpp you gotta redefine static things for some reason
 sf::Vector2u Canvas::size;
 sf::RenderTexture Canvas::renderTexture;
+float zoom;
 
 void Canvas::Start()
 {
 	SetSize(100, 100);
-	renderTexture = sf::RenderTexture(GetSize());
+	renderTexture = sf::RenderTexture(size);
 }
 
 void Canvas::Update(float deltaTime, sf::RenderWindow& window)
