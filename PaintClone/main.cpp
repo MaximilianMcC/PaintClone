@@ -1,7 +1,9 @@
 #pragma once	
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
 #include "canvas.h"
+#include "program.h"
 
 // TODO: Don't f2 rename types (cpp issue (breaks everything))
 
@@ -14,6 +16,15 @@ int main()
 	float deltaTime = 0.0f;
 	sf::Clock deltaTimeClock = sf::Clock();
 
+	// Share data with whoever's keen
+	Program::Init(&deltaTime, &window);
+
+	// Load/register everything
+	// TODO: Most of these should probably be static but its worth it for `Thing`
+	// std::vector<Thing> things;
+	Canvas temp = Canvas();
+	// things.push_back(temp);
+
 	// Main program loop
 	while (window.isOpen())
 	{
@@ -25,19 +36,23 @@ int main()
 		}
 
 		// Calculate delta time
+		//? Since a pointer was given we don't need to bother updating it
 		deltaTime = deltaTimeClock.restart().asSeconds();
-		//std::cout << "Delta Time: " << deltaTime << std::endl;
 
-		// Update
+		// Update everything
 		{
-			Canvas::Update(deltaTime, window);
+			// for (int i = 0; i < things.size(); i++) things[i].Update();
+			temp.Update();
 		}
 
-		// Draw
+		// Draw everything
 		window.clear();
 		{
-			Canvas::Draw(window);
+			// for (int i = 0; i < things.size(); i++) things[i].Draw();
+			temp.Draw();
 		}
 		window.display();
 	}
+
+	return 0;
 }
