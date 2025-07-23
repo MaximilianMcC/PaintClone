@@ -1,4 +1,5 @@
 #include "canvas.h"
+#include <iostream>
 
 Canvas::Canvas()
 {
@@ -12,44 +13,47 @@ void Canvas::Start()
 		Program::GetWindow()->getSize().x * 0.8f,
 		Program::GetWindow()->getSize().y * 0.8f,
 	});
-	renderTexture = sf::RenderTexture();
+
+	// Set a default background color of a kinda dark color
+	// TODO: Set transparent with transparent grid in the back
+	// TODO: Put colors and whatnot in enum
+	canvas.setFillColor(sf::Color(0xff00ffff));
+
+	// Create the render texture so we can draw
+	//? When you add layers, just draw in the correct order instead of multiple render textures
+	sf::Vector2u canvasSize = static_cast<sf::Vector2u>(canvas.getSize());
+	renderTexture = sf::RenderTexture(canvasSize);
+
+	// Make the sprite so we can actually render the render texture
+	outputSprite = sf::Sprite(renderTexture.getTexture());
+
+	// Figure out how much room we've for the canvas to
+	// occupy, excluding the left and top bar ui things
+	sf::Vector2f availableSpace = static_cast<sf::Vector2f>(Program::GetWindow()->getSize());
+	// availableSpace.X -= leftToolBarSize.X;
+	// availableSpace.Y -= leftToolBarSize.Y;
+	
+	// Place the canvas in the centre by default/initially
+	// TODO: Account for zoom → `outputSprite.setScale();`
+	sf::Vector2f canvasSpawnPosition = (availableSpace - canvas.getSize()) / 2.0f;
+	outputSprite->setPosition(canvasSpawnPosition);
 }
 
 void Canvas::Update()
 {
-	//? temp
-	float bruhSize = 30;
-	sf::Color bruhColor = sf::Color::Black;
 
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-	{
-		// Get the mouse position relative to the window
-		// TODO: Make it relative to the canvas
-		// sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-
-		// We wanna start drawing from the centre, not top left
-		// sf::Vector2f strokePosition = static_cast<sf::Vector2f>(mousePosition);
-		// strokePosition -= sf::Vector2f(bruhSize, bruhSize);
-
-		// Make the brush stroke
-		// sf::CircleShape stroke(bruhSize);
-		// stroke.setFillColor(bruhColor);
-		// stroke.setPosition(strokePosition);
-
-		// Draw it onto the canvas
-		// renderTexture.draw(stroke);
-		// renderTexture.display();
-	}
 }
 
 void Canvas::Draw()
 {
-	// Turn the render texture into a sprite so we can draw it
-	sf::Texture canvas = renderTexture.getTexture();
-	sf::Sprite canvasSprite(canvas);
+	//! temp debug
+	renderTexture.draw(canvas);
 
-	// Draw it
-	// window->draw(canvasSprite);
+	// Turn the render texture into a sprite so we can draw it
+	// sf::Texture canvas = renderTexture.getTexture();
+	// sf::Sprite canvasSprite(canvas);
+
+	// Program::GetWindow()->draw(canvasSprite);
 }
 
 //? & is a fake c# out variable

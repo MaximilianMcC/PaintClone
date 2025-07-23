@@ -21,9 +21,9 @@ int main()
 
 	// Load/register everything
 	// TODO: Most of these should probably be static but its worth it for `Thing`
-	// std::vector<Thing> things;
-	Canvas temp = Canvas();
-	// things.push_back(temp);
+	// TODO: Use unique pointers (heaps safer)
+	std::vector<Thing*> things;
+	things.push_back(new Canvas());
 
 	// Main program loop
 	while (window.isOpen())
@@ -38,20 +38,26 @@ int main()
 		// Calculate delta time
 		//? Since a pointer was given we don't need to bother updating it
 		deltaTime = deltaTimeClock.restart().asSeconds();
+		// std::cout << *Program::GetDeltaTime() << std::endl;
 
 		// Update everything
 		{
-			// for (int i = 0; i < things.size(); i++) things[i].Update();
-			temp.Update();
+			for (Thing* thing : things) thing->Update();
 		}
 
 		// Draw everything
 		window.clear();
 		{
-			// for (int i = 0; i < things.size(); i++) things[i].Draw();
-			temp.Draw();
+			for (Thing* thing : things) thing->Draw();
 		}
 		window.display();
+	}
+
+	// Be a tidy kiwi
+	for (Thing* thing : things)
+	{
+		thing->CleanUp();
+		delete thing;
 	}
 
 	return 0;

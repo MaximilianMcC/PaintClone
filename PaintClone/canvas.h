@@ -5,7 +5,7 @@
 class Canvas : public Thing
 {
 private:
-	float zoom;
+	std::optional<sf::Sprite> outputSprite;
 	sf::RenderTexture renderTexture;
 	sf::RectangleShape canvas;
 
@@ -17,15 +17,4 @@ public:
 
 	// Returns false if the mouse is not on the canvas
 	bool GetMousePosition(sf::Vector2f& position);
-
-	// Zoom getters and setters
-	// TODO: Don't wite in H
-	float GetZoom()
-	{
-		return zoom;
-	}
-	void SetZoom(float newZoom)
-	{
-		zoom = newZoom;
-	}
 };
