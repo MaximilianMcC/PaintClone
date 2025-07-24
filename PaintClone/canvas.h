@@ -7,7 +7,8 @@ class Canvas : public Thing
 private:
 	std::optional<sf::Sprite> outputSprite;
 	sf::RenderTexture renderTexture;
-	sf::RectangleShape canvas;
+	sf::RectangleShape canvasBackground;
+	sf::Vector2f renderPosition;
 
 public:
 	Canvas();
@@ -15,6 +16,7 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	// Returns false if the mouse is not on the canvas
+	// Get the mouse position relative to the canvas
+	//? Returns false if the mouse is not on the canvas
 	bool GetMousePosition(sf::Vector2f& position);
 };
