@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "program.h"
 #include <iostream>
+#include "utils.h"
 
 class Thing
 {
