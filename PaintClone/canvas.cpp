@@ -8,27 +8,17 @@ Canvas::Canvas()
 void Canvas::Start()
 {
 	// Make the canvas 80% of the size of the window
-	// TODO: Don't have this canvasBackground thing
-	canvasBackground = sf::RectangleShape({
-		Program::GetWindow()->getSize().x * 0.8f,
-		Program::GetWindow()->getSize().y * 0.8f,
-	});
-
-	// Set a default background color
-	// TODO: Set transparent with transparent grid in the back
-	// TODO: Put colors and whatnot in enum
-	canvasBackground.setFillColor(sf::Color(0xff00ffff));
+	float initialCanvasScaleFactor = 0.8f;
+	sf::Vector2f windowSize = static_cast<sf::Vector2f>(Program::GetWindow()->getSize());
+	size = windowSize * initialCanvasScaleFactor;
 
 	// Create the render texture so we can draw
 	//? When you add layers, just draw in the correct order instead of multiple render textures
-	sf::Vector2u canvasSize = static_cast<sf::Vector2u>(canvasBackground.getSize());
+	sf::Vector2u canvasSize = static_cast<sf::Vector2u>(size);
 	renderTexture = sf::RenderTexture(canvasSize);
-	
-	//! debug
-	renderTexture.draw(canvasBackground);
-
-	// Make the sprite so we can actually render the render texture
 	renderTexture.display();
+	
+	// Make the sprite so we can actually render the render texture
 	outputSprite = sf::Sprite(renderTexture.getTexture());
 
 	// Figure out how much room we've for the canvas to
@@ -45,13 +35,18 @@ void Canvas::Start()
 	// Place the canvas in the centre by default
 	renderPosition = availableSpace / 2.0f;
 	outputSprite->setPosition(renderPosition);
+
+	
+
+
+	// Draw a transparent background on the canvas
+	// TODO: Don't do this here
+	//! temp debug
+	renderTexture.draw(*GenerateDynamicCanvasTransparentBackgroundSpriteGridPattern().sprite);
 }
 
 void Canvas::Update()
 {
-	sf::Vector2f position;
-	Program::GetWindow()->setTitle(GetMousePosition(position) ? "on" : "off");
-
 	//! debug
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 	{
@@ -61,6 +56,7 @@ void Canvas::Update()
 
 		// Make the dot
 		sf::CircleShape stroke = sf::CircleShape();
+		stroke.setFillColor(sf::Color(0xff00ffff));
 		stroke.setRadius(5);
 		stroke.setOrigin({ 5.0f, 5.0f });
 		stroke.setPosition(position);
@@ -74,6 +70,8 @@ void Canvas::Draw()
 {
 	// Draw the canvas
 	Program::GetWindow()->draw(*outputSprite);
+
+	// Program::GetWindow()->draw(*GenerateDynamicCanvasTransparentBackgroundSpriteGridPattern().sprite);
 }
 
 //? & is a fake c# out variable
@@ -92,4 +90,64 @@ bool Canvas::GetMousePosition(sf::Vector2f& position)
 	position -= outputSprite->getPosition() - outputSprite->getOrigin();
 
 	return true;
+}
+
+// TODO: Call this every time we resize
+// TODO: Only call this if its visible? 
+SpriteWithTexture Canvas::GenerateDynamicCanvasTransparentBackgroundSpriteGridPattern()
+{
+	// Make a new render texture to draw on
+	sf::Vector2u canvasSize = static_cast<sf::Vector2u>(size);
+	sf::RenderTexture transparentRenderTexture = sf::RenderTexture(canvasSize);
+
+	// Figure out how many rows/columns we need
+	// TODO: Make dynamic
+	int rows = 100;
+	int columns = 80;
+	sf::Vector2f squareSize = sf::Vector2f(
+		size.x / rows,
+		size.y / columns
+	);
+
+	// The two colors to use for transparency
+	// TODO: Dark/light theme alternatives
+	sf::Color evenColor = sf::Color(0xffffffFF);
+	sf::Color oddColor = sf::Color(0xcacacaFF);
+
+	// Make the square cube thingy we're
+	// gonna use to draw the pattern
+	sf::RectangleShape square = sf::RectangleShape();
+	square.setSize(squareSize);
+
+	// Draw the pattern
+	for (int y = 0; y < columns; y++)
+	{
+		for (int x = 0; x < rows; x++)
+		{
+			// Set the correct color
+			sf::Color &color = ((x + y) % 2 == 0) ? evenColor : oddColor;
+			square.setFillColor(color);
+
+			// Set the new position
+			square.setPosition(sf::Vector2f(
+				x * squareSize.x,
+				y * squareSize.y
+			));
+
+			// Draw the little square thingy
+			transparentRenderTexture.draw(square);
+		}
+	}
+
+	// 'Bake' the pattern
+	transparentRenderTexture.display();
+
+	// Chuck it in a struct so we can render it
+	//? `emplace` calls the ctor of the sprite kinda
+	SpriteWithTexture output;
+	output.texture = transparentRenderTexture.getTexture();
+	output.sprite.emplace(output.texture);
+
+	// ka pai
+	return output;
 }

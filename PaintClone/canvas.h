@@ -7,8 +7,11 @@ class Canvas : public Thing
 private:
 	std::optional<sf::Sprite> outputSprite;
 	sf::RenderTexture renderTexture;
-	sf::RectangleShape canvasBackground;
+	sf::Vector2f size;
 	sf::Vector2f renderPosition;
+
+	//? Is made to be the same size as the canvas is
+	SpriteWithTexture GenerateDynamicCanvasTransparentBackgroundSpriteGridPattern();
 
 public:
 	Canvas();
