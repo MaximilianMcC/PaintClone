@@ -38,7 +38,6 @@ void Canvas::Start()
 
 	
 
-
 	// Draw a transparent background on the canvas
 	// TODO: Don't do this here
 	//! temp debug
@@ -100,14 +99,18 @@ SpriteWithTexture Canvas::GenerateDynamicCanvasTransparentBackgroundSpriteGridPa
 	sf::Vector2u canvasSize = static_cast<sf::Vector2u>(size);
 	sf::RenderTexture transparentRenderTexture = sf::RenderTexture(canvasSize);
 
-	// Figure out how many rows/columns we need
-	// TODO: Make dynamic
-	int rows = 100;
-	int columns = 80;
+	// The size of a square should always be 5% of the width of the screen
+	// TODO: Maybe hardcode for specific monitor sizes?
+	float screenSizeToPixelRatio = 0.005f;
+	sf::Vector2u screenSize = sf::VideoMode::getDesktopMode().size;
 	sf::Vector2f squareSize = sf::Vector2f(
-		size.x / rows,
-		size.y / columns
+		(float)screenSize.x * screenSizeToPixelRatio,
+		(float)screenSize.x * screenSizeToPixelRatio
 	);
+
+	// Figure out how many rows/columns are needed
+	int rows = size.x / squareSize.x;
+	int columns = size.y / squareSize.y;
 
 	// The two colors to use for transparency
 	// TODO: Dark/light theme alternatives
