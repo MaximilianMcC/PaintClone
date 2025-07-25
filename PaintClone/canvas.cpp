@@ -46,23 +46,8 @@ void Canvas::Start()
 
 void Canvas::Update()
 {
-	//! debug
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-	{
-		// Get the position of the mouse
-		sf::Vector2f position;
-		if (GetMousePosition(position) == false) return;
-
-		// Make the dot
-		sf::CircleShape stroke = sf::CircleShape();
-		stroke.setFillColor(sf::Color(0xff00ffff));
-		stroke.setRadius(5);
-		stroke.setOrigin({ 5.0f, 5.0f });
-		stroke.setPosition(position);
-
-		// Draw the dot
-		renderTexture.draw(stroke);
-	}
+	// Check for if we'd like to zoom in
+	std::cout << *Program::GetMouseDelta() << std::endl;
 }
 
 void Canvas::Draw()
@@ -109,8 +94,8 @@ SpriteWithTexture Canvas::GenerateDynamicCanvasTransparentBackgroundSpriteGridPa
 	);
 
 	// Figure out how many rows/columns are needed
-	int rows = size.x / squareSize.x;
-	int columns = size.y / squareSize.y;
+	int rows = (int)(size.x / squareSize.x);
+	int columns = (int)(size.y / squareSize.y);
 
 	// The two colors to use for transparency
 	// TODO: Dark/light theme alternatives

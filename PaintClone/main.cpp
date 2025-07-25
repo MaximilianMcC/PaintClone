@@ -7,6 +7,7 @@
 
 // TODO: Don't f2 rename types (cpp issue (breaks everything))
 
+// TODO: Use const where applicable. Methods and whatnot idk
 int main()
 {
 	// Setup the SFML window
@@ -16,8 +17,11 @@ int main()
 	float deltaTime = 0.0f;
 	sf::Clock deltaTimeClock = sf::Clock();
 
+	// sfml events system is stink so doing this
+	float mouseDelta = 0.0f;
+
 	// Share data with whoever's keen
-	Program::Init(&deltaTime, &window);
+	Program::Init(&deltaTime, &window, &mouseDelta);
 
 	// Load/register everything
 	// TODO: Most of these should probably be static but its worth it for `Thing`
@@ -28,11 +32,22 @@ int main()
 	// Main program loop
 	while (window.isOpen())
 	{
-		// Check for events
+		// Clear the old events, and check for any new events
 		while (const std::optional event = window.pollEvent())
 		{
 			// Check for if we wanna close the window
 			if (event->is<sf::Event::Closed>()) window.close();
+
+			// Check for if we scrolled
+			if (const sf::Event::MouseWheelScrolled* mouseEvent = event->getIf<sf::Event::MouseWheelScrolled>())
+			{
+				// Only interested in vertical scrolling because I lowk never seen a horizontal mouse
+				if (mouseEvent->wheel != sf::Mouse::Wheel::Vertical) continue;
+
+				// Store the event
+				mouseDelta = mouseEvent->delta;
+			}
+			else mouseDelta = 0;
 		}
 
 		// Calculate delta time

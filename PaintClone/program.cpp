@@ -4,3 +4,4 @@
 
 float* Program::deltaTime = nullptr;
 sf::RenderWindow* Program::window = nullptr;
+float* Program::mouseDelta = nullptr;
