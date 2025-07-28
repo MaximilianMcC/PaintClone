@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch PaintClone",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/PaintClone/Debug/PaintClone.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/PaintClone",
+      "environment": [],
+      "console": "externalTerminal",
+      "preLaunchTask": "Build PaintClone"
+    }
+  ]
+}

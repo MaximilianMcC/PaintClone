@@ -1,0 +1,28 @@
+{
+	"files.exclude": {
+		"**/.vs": true,
+		"**/Debug": true,
+		"**/Release": true,
+		"**/x64": true,
+		"**/x86": true,
+		"**/bin": true,
+		"**/obj": true,
+		"**/include": true,
+		"**/lib": true,
+		"**/*vcxproj*": true,
+
+		"**/PaintClone/PaintClone": true,
+	},
+	"search.exclude": {
+		"**/.vs": true,
+		"**/Debug": true,
+		"**/Release": true,
+		"**/x64": true,
+		"**/x86": true,
+		"**/bin": true,
+		"**/obj": true,
+		"**/include": true,
+		"**/lib": true,
+		"**/*vcxproj*": true,
+	}
+}
