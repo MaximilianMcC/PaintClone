@@ -4,14 +4,16 @@
 class Toolbar : public Thing
 {
 private:
-	sf::RectangleShape background;
-public:
-	void Start() override;
-	void Update(float deltaTime, sf::RenderWindow& window) override;
-	void Draw(sf::RenderWindow& window) override;
+	sf::RectangleShape toolSelector;
+	sf::RectangleShape toolSettings;
+	// std::vector<Tool> tools;
 
-	sf::RectangleShape GetBackground()
-	{
-		return background;
-	}
+
+public:
+	Toolbar();
+	void Start() override;
+	void Update() override;
+	void Draw() override;
+
+	void ResizeUi();
 };

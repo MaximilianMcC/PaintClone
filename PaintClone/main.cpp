@@ -1,9 +1,12 @@
-#pragma once	
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-#include "canvas.h"
 #include "program.h"
+
+// Things
+#include "canvas.h"
+#include "toolbar.h"
 
 // TODO: Don't f2 rename types (cpp issue (breaks everything))
 
@@ -28,6 +31,7 @@ int main()
 	// TODO: Use unique pointers (heaps safer)
 	std::vector<Thing*> things;
 	things.push_back(new Canvas());
+	things.push_back(new Toolbar());
 
 	// Main program loop
 	while (window.isOpen())
