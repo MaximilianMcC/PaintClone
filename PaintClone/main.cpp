@@ -47,6 +47,17 @@ int main()
 				continue;
 			}
 
+			// Check for if we wanna resize the window
+			if (const sf::Event::Resized* resize = event->getIf<sf::Event::Resized>())
+			{
+				// Get the size that we want the window to be
+				sf::Vector2f newSize = static_cast<sf::Vector2f>(resize->size);
+				sf::FloatRect newWindowSize(sf::Vector2f(0.0f, 0.0f), newSize);
+
+				// Don't stretch the window by changing its camera size
+				window.setView(sf::View(newWindowSize));
+			}
+
 			// Extract the 'pure' event, then send it to
 			// all things to use (not a fan of std::optional)
 			sf::Event currentEvent = event.value();
