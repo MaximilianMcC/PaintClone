@@ -51,12 +51,23 @@ void Canvas::HandleEvent(sf::Event& event)
 	if (const sf::Event::MouseWheelScrolled* mouseEvent = event.getIf<sf::Event::MouseWheelScrolled>())
 	{
 		// Get the scrolls delta
-		float delta = mouseEvent->delta;
+		const float delta = mouseEvent->delta;
 
-		// Zoom into the canvas
+		// Get how much we're gonna zoom
+		// TODO: Get sign then use delta on that idk
+		const float zoomMultiplier = 0.05f;
+		const float zoom = delta * zoomMultiplier;
+		const sf::Vector2f newZoom = outputSprite->getScale() + sf::Vector2f(zoom, zoom);
 
+		// Resize the canvas to zoom
+		outputSprite->setScale(newZoom);
+		renderTexture.draw(*GenerateDynamicCanvasTransparentBackgroundSpriteGridPattern().sprite);
+	}
 
-		return;
+	// Check for if we've resized
+	if (event.is<sf::Event::Resized>())
+	{
+		renderTexture.draw(*GenerateDynamicCanvasTransparentBackgroundSpriteGridPattern().sprite);
 	}
 }
 
@@ -86,6 +97,7 @@ bool Canvas::GetMousePosition(sf::Vector2f& position)
 
 // TODO: Call this every time we resize
 // TODO: Only call this if its visible? 
+// TODO: Maybe just make this edit a private render texture or something
 SpriteWithTexture Canvas::GenerateDynamicCanvasTransparentBackgroundSpriteGridPattern()
 {
 	// Make a new render texture to draw on
