@@ -44,18 +44,26 @@ void Canvas::Start()
 	renderTexture.draw(*GenerateDynamicCanvasTransparentBackgroundSpriteGridPattern().sprite);
 }
 
-void Canvas::Update()
+// TODO: Don't put event definitions in the if statement
+void Canvas::HandleEvent(sf::Event& event)
 {
-	// Check for if we'd like to zoom in
-	std::cout << *Program::GetMouseDelta() << std::endl;
+	// Check for if we've scrolled
+	if (const sf::Event::MouseWheelScrolled* mouseEvent = event.getIf<sf::Event::MouseWheelScrolled>())
+	{
+		// Get the scrolls delta
+		float delta = mouseEvent->delta;
+
+		// Zoom into the canvas
+
+
+		return;
+	}
 }
 
 void Canvas::Draw()
 {
 	// Draw the canvas
 	Program::GetWindow()->draw(*outputSprite);
-
-	// Program::GetWindow()->draw(*GenerateDynamicCanvasTransparentBackgroundSpriteGridPattern().sprite);
 }
 
 //? & is a fake c# out variable

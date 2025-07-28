@@ -10,7 +10,7 @@ void Toolbar::Start()
 	// The 'size' of a toolbar is 1/20th of the screen size
 	// TODO: No magic numbers
 	sf::Vector2u screenSize = sf::VideoMode::getDesktopMode().size;
-	float size = screenSize.x / 20;
+	float size = screenSize.x / 20.0f;
 
 	// Horizontal
 	toolSettings = sf::RectangleShape(sf::Vector2(0.0f, size));
@@ -28,9 +28,10 @@ void Toolbar::Start()
 	ResizeUi();
 }
 
-void Toolbar::Update()
+void Toolbar::HandleEvent(sf::Event& event)
 {
-	// erhm
+	// Resize the ui to accompany the window
+	if (event.is<sf::Event::Resized>()) ResizeUi();
 }
 
 // Make the ui elements fit the screen size properly

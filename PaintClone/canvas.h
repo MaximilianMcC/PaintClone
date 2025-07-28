@@ -16,7 +16,8 @@ private:
 public:
 	Canvas();
 	void Start() override;
-	void Update() override;
+	void HandleEvent(sf::Event &event);
+	// void Update() override;
 	void Draw() override;
 
 	// Get the mouse position relative to the canvas

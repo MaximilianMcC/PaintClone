@@ -12,7 +12,8 @@ private:
 public:
 	Toolbar();
 	void Start() override;
-	void Update() override;
+	void HandleEvent(sf::Event &event) override;
+	// void Update() override;
 	void Draw() override;
 
 	void ResizeUi();
