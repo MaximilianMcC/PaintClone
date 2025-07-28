@@ -24,5 +24,8 @@
 		"**/include": true,
 		"**/lib": true,
 		"**/*vcxproj*": true,
+	},
+	"files.associations": {
+		"iostream": "cpp"
 	}
 }
