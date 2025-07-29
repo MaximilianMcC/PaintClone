@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include "program.h"
 
 
 class Camera
@@ -11,8 +12,8 @@ private:
 	sf::Vector2f targetRenderOffset = sf::Vector2f(0.0f, 0.0f);
 	sf::Vector2f size = sf::Vector2f(0.0f, 0.0f);
 
-	//! sprite mighe need to be std::optional
-	sf::RenderTexture view;
+	//! sprite might need to be std::optional
+	sf::RenderTexture camera;
 	sf::Sprite outputSprite;
 
 public:
@@ -20,11 +21,11 @@ public:
 
 
 	// Actually draw to the camera
-	void Draw(sf::Drawable thingToDraw);
+	void DrawToCamera(sf::Drawable* thingToDraw);
 
+	// Draw the output of the camera to the window
+	void DrawOutput();
 
-	// Get the output of the camera
-	sf::Sprite GetOutput();
 
 
 	// Zooming
