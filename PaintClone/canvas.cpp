@@ -7,14 +7,18 @@ Canvas::Canvas()
 
 void Canvas::Start()
 {
-	// Make the canvas 80% of the size of the window
-	float initialCanvasScaleFactor = 0.8f;
-	sf::Vector2f windowSize = static_cast<sf::Vector2f>(Program::GetWindow()->getSize());
-	size = windowSize * initialCanvasScaleFactor;
+	// The size of the default canvas is 1920x1080
+	// TODO: Make it so you can change this in the settings
+	size = sf::Vector2f(1920, 1080);
+	sf::Vector2u canvasSize = static_cast<sf::Vector2u>(size);
+
+	// Set the transparent thingy to
+	// be the same size as the canvas
+	transparentRenderTexture = sf::RenderTexture(canvasSize);
+	RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPattern();
 
 	// Create the render texture so we can draw
 	//? When you add layers, just draw in the correct order instead of multiple render textures
-	sf::Vector2u canvasSize = static_cast<sf::Vector2u>(size);
 	renderTexture = sf::RenderTexture(canvasSize);
 	renderTexture.display();
 	
@@ -35,13 +39,6 @@ void Canvas::Start()
 	// Place the canvas in the centre by default
 	renderPosition = availableSpace / 2.0f;
 	outputSprite->setPosition(renderPosition);
-
-	
-
-	// Draw a transparent background on the canvas
-	// TODO: Don't do this here
-	//! temp debug
-	renderTexture.draw(*GenerateDynamicCanvasTransparentBackgroundSpriteGridPattern().sprite);
 }
 
 // TODO: Don't put event definitions in the if statement
@@ -52,29 +49,24 @@ void Canvas::HandleEvent(sf::Event& event)
 	{
 		// Get the scrolls delta
 		const float delta = mouseEvent->delta;
-
-		// Get how much we're gonna zoom
-		// TODO: Get sign then use delta on that idk
-		const float zoomMultiplier = 0.05f;
-		const float zoom = delta * zoomMultiplier;
-		const sf::Vector2f newZoom = outputSprite->getScale() + sf::Vector2f(zoom, zoom);
-
-		// Resize the canvas to zoom
-		outputSprite->setScale(newZoom);
-		renderTexture.draw(*GenerateDynamicCanvasTransparentBackgroundSpriteGridPattern().sprite);
+		Zoom(delta);
 	}
 
 	// Check for if we've resized
 	if (event.is<sf::Event::Resized>())
 	{
-		renderTexture.draw(*GenerateDynamicCanvasTransparentBackgroundSpriteGridPattern().sprite);
+
 	}
 }
 
 void Canvas::Draw()
 {
-	// Draw the canvas
-	Program::GetWindow()->draw(*outputSprite);
+	// Draw the very bottom transparent thing
+	Program::GetWindow()->draw(*transparentSprite);
+
+	// Draw all the layers
+	
+	// Program::GetWindow()->draw(*outputSprite);
 }
 
 //? & is a fake c# out variable
@@ -98,12 +90,9 @@ bool Canvas::GetMousePosition(sf::Vector2f& position)
 // TODO: Call this every time we resize
 // TODO: Only call this if its visible? 
 // TODO: Maybe just make this edit a private render texture or something
-SpriteWithTexture Canvas::GenerateDynamicCanvasTransparentBackgroundSpriteGridPattern()
+// TODO: Just generate once (window size) then scissor to cut a hole in the canvas to show through
+void Canvas::RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPattern()
 {
-	// Make a new render texture to draw on
-	sf::Vector2u canvasSize = static_cast<sf::Vector2u>(size);
-	sf::RenderTexture transparentRenderTexture = sf::RenderTexture(canvasSize);
-
 	// The size of a square should always be 5% of the width of the screen
 	// TODO: Maybe hardcode for specific monitor sizes?
 	float screenSizeToPixelRatio = 0.005f;
@@ -147,15 +136,25 @@ SpriteWithTexture Canvas::GenerateDynamicCanvasTransparentBackgroundSpriteGridPa
 		}
 	}
 
-	// 'Bake' the pattern
+	// 'Bake' the pattern, and chuck it on a texture
+	// TODO: Don't make a new sprite every time. Just change texture
 	transparentRenderTexture.display();
+	transparentSprite = sf::Sprite(transparentRenderTexture.getTexture());
+	//? transparentSprite->setTexture(transparentRenderTexture.getTexture());
+}
 
-	// Chuck it in a struct so we can render it
-	//? `emplace` calls the ctor of the sprite kinda
-	SpriteWithTexture output;
-	output.texture = transparentRenderTexture.getTexture();
-	output.sprite.emplace(output.texture);
 
-	// ka pai
-	return output;
+
+
+// TODO: Make a float for scale but idk its just like duplicated data
+void Canvas::Zoom(float delta)
+{
+	// Get how much we're gonna zoom
+	const float zoomMultiplier = 0.05f;
+	const float zoom = delta * zoomMultiplier;
+	const sf::Vector2f newZoom = outputSprite->getScale() + sf::Vector2f(zoom, zoom);
+
+	// Resize the canvas to zoom
+	outputSprite->setScale(newZoom);
+	RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPattern();
 }

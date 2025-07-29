@@ -11,7 +11,11 @@ private:
 	sf::Vector2f renderPosition;
 
 	//? Is made to be the same size as the canvas is
-	SpriteWithTexture GenerateDynamicCanvasTransparentBackgroundSpriteGridPattern();
+	sf::RenderTexture transparentRenderTexture;
+	std::optional<sf::Sprite> transparentSprite;
+	void RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPattern();
+
+	void Zoom(float delta = 0);
 
 public:
 	Canvas();
