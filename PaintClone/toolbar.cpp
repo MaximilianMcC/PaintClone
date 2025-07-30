@@ -27,6 +27,16 @@ void Toolbar::Start()
 
 	// Set their initial dynamic sizes
 	ResizeUi();
+
+
+
+	// Make all the buttons
+	// TODO: Put in another function
+	{
+		button = new Button(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(10.0f, 10.0f), sf::Color(0xffffffff));
+		uiElements.push_back(button);
+	}
+
 }
 
 void Toolbar::HandleEvent(sf::Event& event)
@@ -55,9 +65,29 @@ void Toolbar::ResizeUi()
 	));
 }
 
+void Toolbar::Update()
+{
+	// Update all the ui elements
+	for (UiElement* uiElement : uiElements) uiElement->Update();
+}
+
 void Toolbar::Draw()
 {
 	// Draw the background ui things
 	Program::GetWindow()->draw(toolSelector);
 	Program::GetWindow()->draw(toolSettings);
+
+	// Draw all the ui elements
+	for (UiElement* uiElement : uiElements) uiElement->Draw();
+}
+
+void Toolbar::CleanUp()
+{
+	// Get rid of all the dynamically added ui elements
+	for (UiElement* uiElement : uiElements)
+	{
+		delete uiElement;
+		uiElement = nullptr;
+	}
+	uiElements.clear();
 }

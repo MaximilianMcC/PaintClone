@@ -8,6 +8,7 @@
 #include "canvas.h"
 #include "toolbar.h"
 
+
 // TODO: Don't f2 rename types (cpp issue (breaks everything))
 // TODO: Use const where applicable. Methods and whatnot idk
 int main()

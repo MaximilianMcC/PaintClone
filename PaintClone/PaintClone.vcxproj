@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="button.cpp" />
     <ClCompile Include="canvas.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="program.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="button.h" />
     <ClInclude Include="canvas.h" />
     <ClInclude Include="program.h" />
     <ClInclude Include="thing.h" />
