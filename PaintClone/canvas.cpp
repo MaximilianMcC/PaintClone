@@ -7,8 +7,6 @@ Canvas::Canvas()
 
 void Canvas::Start()
 {
-	// The size of the default canvas is 1920x1080
-	// TODO: Make it so you can change this in the settings
 	size = sf::Vector2f(1920, 1080);
 	sf::Vector2u canvasSize = static_cast<sf::Vector2u>(size);
 
@@ -74,14 +72,13 @@ void Canvas::Draw()
 bool Canvas::GetMousePosition(sf::Vector2f& position)
 {
 	// Get the mouse position as a vector2
-	sf::Vector2i rawPosition = sf::Mouse::getPosition(*Program::GetWindow());
-	position = static_cast<sf::Vector2f>(rawPosition);
+	position = Program::GetMousePosition();
 
 	// Ensure the mouse is actually over the canvas
 	if (outputSprite->getGlobalBounds().contains(position) == false) return false;
 
 	// Account for the offset to find the actual position
-	position = Program::GetWindow()->mapPixelToCoords(rawPosition);
+	position = Program::GetWindow()->mapPixelToCoords(static_cast<sf::Vector2i>(position));
 	position -= outputSprite->getPosition() - outputSprite->getOrigin();
 
 	return true;

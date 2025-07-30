@@ -28,4 +28,12 @@ public:
 	{
 		return window;
 	}
+
+	// Get the mouse position relative to the window, and
+	// return it as a float rather that int
+	static sf::Vector2f GetMousePosition()
+	{
+		sf::Vector2i mousePosition = sf::Mouse::getPosition(*GetWindow());
+		return static_cast<sf::Vector2f>(mousePosition);
+	}
 };
