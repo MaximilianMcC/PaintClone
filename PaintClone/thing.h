@@ -7,10 +7,20 @@
 class Thing
 {
 public:
-	//? = 0 makes it an abstract method
-	virtual void Start() = 0;
+	virtual void Start() { }
 	virtual void Update() { }
 	virtual void HandleEvent(sf::Event &currentEvent) { }
-	virtual void Draw() = 0;
+	virtual void Draw() { }
 	virtual void CleanUp() { }
+};
+
+// Just for organisation
+class UiElement : public Thing
+{
+public:
+	void Start() override { }
+	void Update() override { }
+	void HandleEvent(sf::Event &currentEvent) override { }
+	void Draw() override { }
+	void CleanUp() override { }
 };
