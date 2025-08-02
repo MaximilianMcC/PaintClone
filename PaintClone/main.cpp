@@ -15,6 +15,7 @@ int main()
 {
 	// Setup the SFML window
 	sf::RenderWindow window(sf::VideoMode(sf::Vector2u(854, 480)), "Paitning rn");
+	window.setIcon(*AssetManager::LoadAndGetImage("icon", "./assets/icon.png"));
 
 	// Delta time setup
 	float deltaTime = 0.0f;
@@ -84,6 +85,7 @@ int main()
 	{
 		thing->CleanUp();
 		delete thing;
+		thing = nullptr;
 	}
 
 	return 0;
