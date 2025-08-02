@@ -1,8 +1,10 @@
 #pragma once
+#include <iostream>
 #include "SFML/Graphics.hpp"
 #include "program.h"
-#include <iostream>
+#include "assetManager.h"
 #include "utils.h"
+
 
 class Thing
 {

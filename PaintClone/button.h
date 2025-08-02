@@ -3,7 +3,7 @@
 
 class Button : public UiElement
 {
-private:
+protected:
     sf::RectangleShape shape;
     
     // TODO: Don't set every frame
@@ -14,7 +14,6 @@ private:
 public:
     Button(sf::Vector2f size, sf::Vector2f position, sf::Color backgroundColor);
 
-	void Start() override { };
     void Update() override;
     void Draw() override;
 

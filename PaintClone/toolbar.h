@@ -1,6 +1,7 @@
 #pragma once
 #include "thing.h"
 #include "button.h"
+#include "imageButton.h"
 
 class Toolbar : public Thing
 {

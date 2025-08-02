@@ -3,10 +3,12 @@
 // TODO: Maybe use references or something for these
 Button::Button(sf::Vector2f size, sf::Vector2f position, sf::Color backgroundColor)
 {
-	// Make the actual button rectange
+	// Make the actual button rectangle
 	shape = sf::RectangleShape(size);
 	shape.setPosition(position);
 	shape.setFillColor(backgroundColor);
+
+	Start();
 }
 
 void Button::Update()

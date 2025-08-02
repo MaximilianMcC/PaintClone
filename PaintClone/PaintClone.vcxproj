@@ -139,16 +139,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="assetManager.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="canvas.cpp" />
+    <ClCompile Include="imageButton.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="program.cpp" />
     <ClCompile Include="toolbar.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="assetManager.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="canvas.h" />
+    <ClInclude Include="imageButton.h" />
     <ClInclude Include="program.h" />
     <ClInclude Include="thing.h" />
     <ClInclude Include="toolbar.h" />

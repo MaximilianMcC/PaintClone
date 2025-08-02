@@ -29,11 +29,13 @@ void Toolbar::Start()
 	ResizeUi();
 
 
-
+	
+	
 	// Make all the buttons
 	// TODO: Put in another function
 	{
-		button = new Button(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(10.0f, 10.0f), sf::Color(0xffffffff));
+		AssetManager::LoadTexture("test", "./assets/test.png");
+		button = new ImageButton("test", sf::Vector2f(120.0f, 100.0f), sf::Vector2f(10.0f, 10.0f));
 		uiElements.push_back(button);
 	}
 
