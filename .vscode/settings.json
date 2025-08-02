@@ -26,6 +26,10 @@
 		"**/*vcxproj*": true,
 	},
 	"files.associations": {
-		"iostream": "cpp"
+		"iostream": "cpp",
+		"vector": "cpp",
+		"map": "cpp",
+		"xstring": "cpp",
+		"string": "cpp"
 	}
 }
