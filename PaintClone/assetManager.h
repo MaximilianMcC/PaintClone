@@ -15,6 +15,7 @@ private:
 
 public:
 	static void LoadTexture(std::string key, std::string path);
+	static sf::Texture* LoadAndGetTexture(std::string key, std::string path);
 	static sf::Texture* GetTexture(std::string key);
 	
 	static void LoadImage(std::string key, std::string path);

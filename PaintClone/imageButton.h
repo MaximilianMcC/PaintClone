@@ -5,10 +5,11 @@
 class ImageButton : public Button
 {
 private:
-	std::optional<sf::Sprite> image;
+	std::optional<sf::Sprite> texture;
 
 public:
-	ImageButton(std::string imageKey, sf::Vector2f size, sf::Vector2f position);
+	ImageButton(sf::Texture* image, sf::Vector2f size, sf::Vector2f position);
+	ImageButton(std::string imagePath, sf::Vector2f size, sf::Vector2f position);
 
 	void Draw() override;
 };

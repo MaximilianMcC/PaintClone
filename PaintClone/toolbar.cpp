@@ -34,8 +34,7 @@ void Toolbar::Start()
 	// Make all the buttons
 	// TODO: Put in another function
 	{
-		AssetManager::LoadTexture("test", "./assets/test.png");
-		button = new ImageButton("test", sf::Vector2f(120.0f, 100.0f), sf::Vector2f(10.0f, 10.0f));
+		button = new ImageButton("D:/test - Copy.png", sf::Vector2f(120.0f, 100.0f), sf::Vector2f(10.0f, 10.0f));
 		uiElements.push_back(button);
 	}
 

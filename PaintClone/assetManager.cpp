@@ -28,6 +28,12 @@ sf::Texture* AssetManager::GetTexture(std::string key)
 	return &textures[key];
 }
 
+sf::Texture* AssetManager::LoadAndGetTexture(std::string key, std::string path)
+{
+	LoadTexture(key, path);
+	return GetTexture(key);
+}
+
 // TODO: Like all this is copy pasted (don't)
 void AssetManager::LoadImage(std::string key, std::string path)
 {
