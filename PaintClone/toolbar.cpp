@@ -34,7 +34,7 @@ void Toolbar::Start()
 	// Make all the buttons
 	// TODO: Put in another function
 	{
-		button = new ImageButton("D:/test - Copy.png", sf::Vector2f(120.0f, 100.0f), sf::Vector2f(10.0f, 10.0f));
+		button = new ImageButton("D:/test - Copy.png", sf::Vector2f(120.0f, 100.0f), sf::Vector2f(10.0f, 10.0f), sf::Keyboard::Key::V);
 		uiElements.push_back(button);
 	}
 
@@ -70,6 +70,8 @@ void Toolbar::Update()
 {
 	// Update all the ui elements
 	for (UiElement* uiElement : uiElements) uiElement->Update();
+
+	if (button->IsClicked()) printf("clciked lowk\n");
 }
 
 void Toolbar::Draw()

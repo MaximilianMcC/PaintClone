@@ -1,12 +1,15 @@
 #include "button.h"
 
 // TODO: Maybe use references or something for these
-Button::Button(sf::Vector2f size, sf::Vector2f position, sf::Color backgroundColor)
+Button::Button(sf::Vector2f size, sf::Vector2f position, sf::Color backgroundColor, sf::Keyboard::Key shortcutKey)
 {
 	// Make the actual button rectangle
 	shape = sf::RectangleShape(size);
 	shape.setPosition(position);
 	shape.setFillColor(backgroundColor);
+
+	// Set the shortcut key
+	shortcut = shortcutKey;
 
 	Start();
 }
@@ -18,6 +21,13 @@ void Button::Update()
 	previouslyClicked = clicked;
 	hovered = false;
 	clicked = false;
+
+	// Check for if we did the shortcut
+	if (sf::Keyboard::isKeyPressed(shortcut))
+	{
+		clicked = true;
+		return;
+	}
 
 	// Get the mouse position
 	sf::Vector2f mousePosition = Program::GetMousePosition();

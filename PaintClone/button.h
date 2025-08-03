@@ -5,6 +5,7 @@ class Button : public UiElement
 {
 protected:
     sf::RectangleShape shape;
+	sf::Keyboard::Key shortcut;
     
     // TODO: Don't set every frame
     bool clicked = false;
@@ -12,7 +13,7 @@ protected:
     bool hovered = false;
 
 public:
-    Button(sf::Vector2f size, sf::Vector2f position, sf::Color backgroundColor);
+    Button(sf::Vector2f size, sf::Vector2f position, sf::Color backgroundColor, sf::Keyboard::Key shortcutKey = sf::Keyboard::Key::Unknown);
 
     void Update() override;
     void Draw() override;

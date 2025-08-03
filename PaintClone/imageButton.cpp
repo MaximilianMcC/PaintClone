@@ -1,7 +1,7 @@
 #include "imageButton.h"
 
-ImageButton::ImageButton(std::string imagePath, sf::Vector2f size, sf::Vector2f position)
-: Button(size, position, sf::Color::Transparent)
+ImageButton::ImageButton(std::string imagePath, sf::Vector2f size, sf::Vector2f position, sf::Keyboard::Key shortcutKey)
+: Button(size, position, sf::Color::Transparent, shortcutKey)
 {
 	// Use the pointer address to ourselves as the image key
 	// TODO: Don't do this
@@ -12,6 +12,7 @@ ImageButton::ImageButton(std::string imagePath, sf::Vector2f size, sf::Vector2f 
 	// Load a new texture and set it as our image
 	texture = sf::Sprite(*AssetManager::LoadAndGetTexture(key, imagePath));
 
+	// TODO: Don't rewrite (put in method)
 	// Set it to be the same as the 'normal' button
 	texture->setPosition(shape.getPosition());
 	texture->setScale(sf::Vector2(
@@ -21,12 +22,13 @@ ImageButton::ImageButton(std::string imagePath, sf::Vector2f size, sf::Vector2f 
 	));
 }
 
-ImageButton::ImageButton(sf::Texture* image, sf::Vector2f size, sf::Vector2f position)
-: Button(size, position, sf::Color::Transparent)
+ImageButton::ImageButton(sf::Texture* image, sf::Vector2f size, sf::Vector2f position, sf::Keyboard::Key shortcutKey)
+: Button(size, position, sf::Color::Transparent, shortcutKey)
 {
 	// Load the image sprite thingy
 	texture = sf::Sprite(*image);
 
+	// TODO: Don't rewrite (put in method)
 	// Set it to be the same as the 'normal' button
 	texture->setPosition(shape.getPosition());
 	texture->setScale(sf::Vector2(
