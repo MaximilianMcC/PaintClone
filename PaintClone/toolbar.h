@@ -1,5 +1,6 @@
 #pragma once
 #include "thing.h"
+#include "tool.h"
 #include "button.h"
 #include "imageButton.h"
 
@@ -9,10 +10,10 @@ private:
 	sf::RectangleShape toolSelector;
 	sf::RectangleShape toolSettings;
 	
-	// std::vector<Tool> tools;
-
+	std::vector<Tool> tools;
 	std::vector<UiElement*> uiElements;
-	Button* button;
+
+	Tool* currentTool;
 
 public:
 	Toolbar();
@@ -23,4 +24,5 @@ public:
 	void CleanUp() override;
 
 	void ResizeUi();
+	std::function<void()> SetTool(Tool* tool);
 };

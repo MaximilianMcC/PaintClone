@@ -145,6 +145,7 @@
     <ClCompile Include="imageButton.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="program.cpp" />
+    <ClCompile Include="tool.cpp" />
     <ClCompile Include="toolbar.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="imageButton.h" />
     <ClInclude Include="program.h" />
     <ClInclude Include="thing.h" />
+    <ClInclude Include="tool.h" />
     <ClInclude Include="toolbar.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>

@@ -34,10 +34,30 @@ void Toolbar::Start()
 	// Make all the buttons
 	// TODO: Put in another function
 	{
-		button = new ImageButton("D:/test - Copy.png", sf::Vector2f(120.0f, 100.0f), sf::Vector2f(10.0f, 10.0f), sf::Keyboard::Key::V);
-		uiElements.push_back(button);
+		// Make the tool
+		Tool* cursorTool = new Tool();
+		ImageButton* cursorButton = new ImageButton("./assets/cursor.png", sf::Vector2f(120.0f, 100.0f), sf::Vector2f(10.0f, 10.0f), sf::Keyboard::Key::V);
+		cursorButton->SetCallback(SetTool(cursorTool));
+
+		currentTool = cursorTool;
+
+		// Set it idk
+		uiElements.push_back(cursorButton);
 	}
 
+}
+std::function<void()> Toolbar::SetTool(Tool* tool)
+{
+	// Give back the lambda function to change the tool
+	return [this, tool]()
+	{
+		// Deselect the current tool
+		currentTool->Deselect();
+
+		// Select the new tool
+		currentTool = tool;
+		currentTool->Select();
+	};
 }
 
 void Toolbar::HandleEvent(sf::Event& event)
@@ -71,7 +91,8 @@ void Toolbar::Update()
 	// Update all the ui elements
 	for (UiElement* uiElement : uiElements) uiElement->Update();
 
-	if (button->IsClicked()) printf("clciked lowk\n");
+	// Update the selected tool
+	currentTool->Update();
 }
 
 void Toolbar::Draw()
@@ -82,6 +103,9 @@ void Toolbar::Draw()
 
 	// Draw all the ui elements
 	for (UiElement* uiElement : uiElements) uiElement->Draw();
+
+	// Draw the selected tool
+	currentTool->Draw();
 }
 
 void Toolbar::CleanUp()
