@@ -1,4 +1,5 @@
 #include "toolbar.h"
+#include "cursorTool.h"
 
 Toolbar::Toolbar()
 {
@@ -35,14 +36,20 @@ void Toolbar::Start()
 	// TODO: Put in another function
 	{
 		// Make the tool
-		Tool* cursorTool = new Tool();
+		CursorTool* cursorTool = new CursorTool("Cursor", "hi");
 		ImageButton* cursorButton = new ImageButton("./assets/cursor.png", sf::Vector2f(120.0f, 100.0f), sf::Vector2f(10.0f, 10.0f), sf::Keyboard::Key::V);
 		cursorButton->SetCallback(SetTool(cursorTool));
 
-		currentTool = cursorTool;
-
-		// Set it idk
+		// Make coppies of the two things and
+		// place them in the lists
 		uiElements.push_back(cursorButton);
+		tools.push_back(cursorTool);
+
+		// By default the cursor tool is the current one
+		//? only kinda acceptable to use [0] here idk
+		// TODO: Don't hardcode index and do this
+		//! fix rn (bad)
+		currentTool = tools[0];
 	}
 
 }
@@ -117,4 +124,12 @@ void Toolbar::CleanUp()
 		uiElement = nullptr;
 	}
 	uiElements.clear();
+
+	// Get rid of all the dynamically added tools
+	for (Tool* tool : tools)
+	{
+		delete tool;
+		tool = nullptr;
+	}
+	tools.clear();
 }

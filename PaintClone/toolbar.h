@@ -10,8 +10,8 @@ private:
 	sf::RectangleShape toolSelector;
 	sf::RectangleShape toolSettings;
 	
-	std::vector<Tool> tools;
 	std::vector<UiElement*> uiElements;
+	std::vector<Tool*> tools;
 
 	Tool* currentTool;
 

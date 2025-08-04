@@ -1,11 +1,12 @@
 #include "tool.h"
 
-void Tool::Select()
+Tool::Tool(std::string displayName, std::string descriptionAndTutorial)
 {
-	std::cout << "selected" << std::endl;
+	name = displayName;
+	info = descriptionAndTutorial;
 }
 
-void Tool::Deselect()
+void Tool::Select()
 {
-    std::cout << "deselected" << std::endl;
+	std::cout << "Selected the " << name << " tool" << std::endl;
 }
