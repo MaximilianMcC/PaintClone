@@ -30,6 +30,7 @@
 		"vector": "cpp",
 		"map": "cpp",
 		"xstring": "cpp",
-		"string": "cpp"
+		"string": "cpp",
+		"functional": "cpp"
 	}
 }
