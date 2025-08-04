@@ -1,9 +1,11 @@
 #pragma once
 #include <iostream>
+#include <functional>
 #include "SFML/Graphics.hpp"
 #include "program.h"
 #include "assetManager.h"
 #include "utils.h"
+
 
 
 class Thing

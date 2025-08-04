@@ -16,6 +16,15 @@ Button::Button(sf::Vector2f size, sf::Vector2f position, sf::Color backgroundCol
 
 void Button::Update()
 {
+	// Check for if we've been clicked
+	CheckForClicking();
+
+	// If we have a callback and were clicked then run the callback
+	if (IsClicked() && callbackFunction != nullptr) callbackFunction();
+}
+
+void Button::CheckForClicking()
+{
 	// Reset variables
 	// TODO: Don't do this every frame
 	previouslyClicked = clicked;
@@ -48,4 +57,9 @@ bool Button::IsHovered() { return hovered; }
 void Button::Draw()
 {
 	Program::GetWindow()->draw(shape);
+}
+
+void Button::SetCallback(std::function<void()> methodToCall)
+{
+	callbackFunction = methodToCall;
 }
