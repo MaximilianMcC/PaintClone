@@ -12,8 +12,9 @@ private:
 	
 	std::vector<UiElement*> uiElements;
 	std::vector<Tool*> tools;
-
 	Tool* currentTool;
+
+	void CreateToolsAndButtons(float columnWidth);
 
 public:
 	Toolbar();

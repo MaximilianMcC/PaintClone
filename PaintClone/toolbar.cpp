@@ -1,5 +1,6 @@
 #include "toolbar.h"
 #include "cursorTool.h"
+#include "rectangleTool.h"
 
 Toolbar::Toolbar()
 {
@@ -28,17 +29,29 @@ void Toolbar::Start()
 
 	// Set their initial dynamic sizes
 	ResizeUi();
-
-
 	
-	
-	// Make all the buttons
-	// TODO: Put in another function
+	// Make all the buttons and tools
+	CreateToolsAndButtons(size);
+}
+
+void Toolbar::CreateToolsAndButtons(float size)
+{
+	float padding = size / 10.0f;
+
+	// Get the size and position of the buttons
+	float buttonDimension = size - (padding * 2.0f);
+	sf::Vector2f buttonSize = sf::Vector2f(buttonDimension, buttonDimension);
+	sf::Vector2f position = sf::Vector2f(padding, size + padding);
+
+	// TODO: Don't use scopes like this
+	// Cursor tool
 	{
-		// Make the tool
 		CursorTool* cursorTool = new CursorTool("Cursor", "hi");
-		ImageButton* cursorButton = new ImageButton("./assets/cursor.png", sf::Vector2f(120.0f, 100.0f), sf::Vector2f(10.0f, 10.0f), sf::Keyboard::Key::V);
+		ImageButton* cursorButton = new ImageButton("./assets/cursor.png", buttonSize, position, sf::Keyboard::Key::V);
 		cursorButton->SetCallback(SetTool(cursorTool));
+
+		// Move the button down a bit
+		position.y += padding + buttonDimension;
 
 		// Make coppies of the two things and
 		// place them in the lists
@@ -52,7 +65,23 @@ void Toolbar::Start()
 		currentTool = tools[0];
 	}
 
+	// Rectangle tool
+	{
+		RectangleTool* rectangleTool = new RectangleTool("Rectangle", "Click and drag to resize");
+		ImageButton* rectangleButton = new ImageButton("./assets/rectangle.png", buttonSize, position, sf::Keyboard::Key::V);
+		rectangleButton->SetCallback(SetTool(rectangleTool));
+
+		// Move the button down a bit
+		position.y += padding + buttonDimension;
+
+		// Make coppies of the two things and
+		// place them in the lists
+		uiElements.push_back(rectangleButton);
+		tools.push_back(rectangleTool);
+	}
 }
+
+
 std::function<void()> Toolbar::SetTool(Tool* tool)
 {
 	// Give back the lambda function to change the tool

@@ -4,6 +4,6 @@
 class CursorTool : public Tool
 {
 public:
-	//? might be wrong idk
-	CursorTool(std::string displayName, std::string descriptionAndTutorial);
+	CursorTool(std::string displayName, std::string descriptionAndTutorial)
+	: Tool(displayName, descriptionAndTutorial) { }
 };
