@@ -36,4 +36,14 @@ public:
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(*GetWindow());
 		return static_cast<sf::Vector2f>(mousePosition);
 	}
+
+	static void SetCursor(sf::Cursor::Type cursorType)
+	{
+		window->setMouseCursor(sf::Cursor(cursorType));
+	}
+
+	static void ResetCursor()
+	{
+		window->setMouseCursor(sf::Cursor(sf::Cursor::Type::Arrow));
+	}
 };
