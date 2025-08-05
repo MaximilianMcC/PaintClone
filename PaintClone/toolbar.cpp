@@ -29,9 +29,13 @@ void Toolbar::Start()
 
 	// Set their initial dynamic sizes
 	ResizeUi();
-	
+
 	// Make all the buttons and tools
 	CreateToolsAndButtons(size);
+
+	// TODO: Don't do this emplace thing
+	selectedToolText.emplace(*AssetManager::GetFont("arial"), currentTool->GetName(), 16u);
+	selectedToolText->setFillColor(sf::Color::White);
 }
 
 void Toolbar::CreateToolsAndButtons(float size)
@@ -68,7 +72,7 @@ void Toolbar::CreateToolsAndButtons(float size)
 	// Rectangle tool
 	{
 		RectangleTool* rectangleTool = new RectangleTool("Rectangle", "Click and drag to resize");
-		ImageButton* rectangleButton = new ImageButton("./assets/rectangle.png", buttonSize, position, sf::Keyboard::Key::V);
+		ImageButton* rectangleButton = new ImageButton("./assets/rectangle.png", buttonSize, position, sf::Keyboard::Key::R);
 		rectangleButton->SetCallback(SetTool(rectangleTool));
 
 		// Move the button down a bit
@@ -93,6 +97,8 @@ std::function<void()> Toolbar::SetTool(Tool* tool)
 		// Select the new tool
 		currentTool = tool;
 		currentTool->Select();
+
+		selectedToolText->setString(currentTool->GetName());
 	};
 }
 
@@ -142,6 +148,8 @@ void Toolbar::Draw()
 
 	// Draw the selected tool
 	currentTool->Draw();
+
+	Program::GetWindow()->draw(*selectedToolText);
 }
 
 void Toolbar::CleanUp()

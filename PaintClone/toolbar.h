@@ -16,6 +16,9 @@ private:
 
 	void CreateToolsAndButtons(float columnWidth);
 
+	// TODO: Make this a UiElement
+	std::optional<sf::Text> selectedToolText;
+
 public:
 	Toolbar();
 	void Start() override;

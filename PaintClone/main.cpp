@@ -31,6 +31,9 @@ int main()
 	things.push_back(new Canvas());
 	things.push_back(new Toolbar());
 
+	// Load a font
+	AssetManager::LoadDefaultFont("arial", "Arial");
+
 	// Main program loop
 	while (window.isOpen())
 	{
