@@ -53,12 +53,11 @@ void Button::CheckForClicking()
 	else
 	{
 		// We are now hovering
+		hovered = true;
 		if (previouslyHovered == false)
 		{
-			// Say we're hovering and set the cursor
-			// to be the little pointer clicky one
-			hovered = true;
-			Program::SetCursor(sf::Cursor::Type::Hand);
+			// Set the cursor to be the clicky one
+			Program::SetCursor(sf::Cursor::Type::Hand, true);
 		}
 
 		// Check for if we clicked on the button

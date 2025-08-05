@@ -8,6 +8,8 @@ sf::RenderWindow* Program::window = nullptr;
 
 sf::Cursor::Type Program::currentCursor = sf::Cursor::Type::Arrow;
 sf::Cursor::Type Program::previousCursor = sf::Cursor::Type::Arrow;
+bool Program::usingTemporaryCursor = false;
+sf::Cursor::Type Program::temporaryCursor;
 
 // This shouldn't really be in here but like
 // I wasn't bothered to make a whole file just
