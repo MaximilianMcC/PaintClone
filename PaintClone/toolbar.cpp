@@ -24,8 +24,8 @@ void Toolbar::Start()
 
 	// Set the colors
 	// TODO: Color themes
-	toolSettings.setFillColor(sf::Color(0x222222FF)); // Darker gray
-	toolSelector.setFillColor(sf::Color(0x333333FF)); // Dark gray
+	toolSettings.setFillColor(Colors::Theme.BackgroundDark);
+	toolSelector.setFillColor(Colors::Theme.BackgroundLight);
 
 	// Set their initial dynamic sizes
 	ResizeUi();
@@ -35,7 +35,7 @@ void Toolbar::Start()
 
 	// TODO: Don't do this emplace thing
 	selectedToolText.emplace(*AssetManager::GetFont("arial"), currentTool->GetName(), 16u);
-	selectedToolText->setFillColor(sf::Color::White);
+	selectedToolText->setFillColor(Colors::Theme.Foreground);
 }
 
 void Toolbar::CreateToolsAndButtons(float size)

@@ -155,6 +155,7 @@
     <ClInclude Include="assetManager.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="canvas.h" />
+    <ClInclude Include="colors.h" />
     <ClInclude Include="cursorTool.h" />
     <ClInclude Include="imageButton.h" />
     <ClInclude Include="program.h" />

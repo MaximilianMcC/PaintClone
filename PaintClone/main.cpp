@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "program.h"
+#include "colors.h"
 
 // Things
 #include "canvas.h"
@@ -24,15 +25,16 @@ int main()
 	// Share data with whoever's keen
 	Program::Init(&deltaTime, &window);
 
+	// Load fonts and set the default color theme
+	AssetManager::LoadDefaultFont("arial", "Arial");
+	Colors::Theme = Colors::HotdogStand;
+
 	// Load/register everything
 	// TODO: Most of these should probably be static but its worth it for `Thing`
 	// TODO: Use unique pointers (heaps safer)
 	std::vector<Thing*> things;
 	things.push_back(new Canvas());
 	things.push_back(new Toolbar());
-
-	// Load a font
-	AssetManager::LoadDefaultFont("arial", "Arial");
 
 	// Main program loop
 	while (window.isOpen())
