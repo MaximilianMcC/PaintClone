@@ -1,7 +1,7 @@
 #include "imageButton.h"
 
 ImageButton::ImageButton(std::string imagePath, sf::Vector2f size, sf::Vector2f position, sf::Keyboard::Key shortcutKey)
-: Button(size, position, sf::Color::Transparent, shortcutKey)
+: Button(size, position, Colors::Theme.BackgroundDark, shortcutKey)
 {
 	// Use the pointer address to ourselves as the image key
 	// TODO: Don't do this
@@ -23,7 +23,7 @@ ImageButton::ImageButton(std::string imagePath, sf::Vector2f size, sf::Vector2f 
 }
 
 ImageButton::ImageButton(sf::Texture* image, sf::Vector2f size, sf::Vector2f position, sf::Keyboard::Key shortcutKey)
-: Button(size, position, sf::Color::Transparent, shortcutKey)
+: Button(size, position, Colors::Theme.BackgroundDark, shortcutKey)
 {
 	// Load the image sprite thingy
 	texture = sf::Sprite(*image);
@@ -40,5 +40,10 @@ ImageButton::ImageButton(sf::Texture* image, sf::Vector2f size, sf::Vector2f pos
 
 void ImageButton::Draw()
 {
+	// Draw the background fill color
+	// TODO: Make this optional (turn it off)
+	Program::GetWindow()->draw(shape);
+
+	// Draw the actual image
 	Program::GetWindow()->draw(*texture);
 }
