@@ -1,7 +1,10 @@
 #pragma once
 #include <map>
 #include <string>
+#include <shlobj.h>
 #include <iostream>
+#include "program.h"
+#include <Windows.h>
 #include <filesystem>
 #include "SFML/Graphics.hpp"
 
@@ -9,9 +12,9 @@ class AssetManager
 {
 private:
 	static std::map<std::string, sf::Texture> textures;
+	static std::map<std::string, sf::Cursor> cursors;
 	static std::map<std::string, sf::Image> images;
 	static std::map<std::string, sf::Font> fonts;
-
 
 public:
 	static void LoadTexture(std::string key, std::string path);
@@ -22,6 +25,6 @@ public:
 	static sf::Image* LoadAndGetImage(std::string key, std::string path);
 	static sf::Image* GetImage(std::string key);
 
-	static void LoadFont(std::string key, std::string path);
+	static void LoadDefaultFont(std::string key, std::string path);
 	static sf::Font* GetFont(std::string key);
 };

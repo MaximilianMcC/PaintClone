@@ -1,6 +1,7 @@
 #include "assetManager.h"
 
 std::map<std::string, sf::Texture> AssetManager::textures;
+std::map<std::string, sf::Cursor> AssetManager::cursors;
 std::map<std::string, sf::Image> AssetManager::images;
 std::map<std::string, sf::Font> AssetManager::fonts;
 
@@ -62,4 +63,35 @@ sf::Image* AssetManager::GetImage(std::string key)
 {
 	// TODO: Check for if they key exists or not
 	return &images[key];
+}
+
+
+void AssetManager::LoadDefaultFont(std::string key, std::string name)
+{
+	// Get the default windows font path
+	// TODO: Don't make this so c-like
+	char fontPath[MAX_PATH];
+	SHGetFolderPathA(NULL, CSIDL_FONTS, NULL, 0, fontPath);
+
+	// Get the requested font
+	std::string path = std::string(fontPath) + "\\" + name + ".ttf";
+
+	// Load it
+	sf::Font font;
+	if (font.openFromFile(path) == false)
+	{
+		// If there was an issue then say
+		// TODO: exit 1
+		std::cerr << "Error loading font at path '" << path << "' (looked in " << std::filesystem::current_path() << ")";
+	}
+
+	// The font was loaded. Chuck it into
+	// the dictionary so it may be used
+	fonts[key] = font;
+}
+
+sf::Font* AssetManager::GetFont(std::string key)
+{
+	// TODO: Check for if they key exists or not
+	return &fonts[key];
 }
