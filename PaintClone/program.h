@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include <iostream>
 
 class Program
 {
@@ -7,6 +8,9 @@ private:
 	// TODO: Use references for most of these (floats especially)
 	static float* deltaTime;
 	static sf::RenderWindow* window;
+
+	static sf::Cursor::Type currentCursor;
+	static sf::Cursor::Type previousCursor;
 
 public:
 	// TODO: Don't write in H
@@ -39,11 +43,23 @@ public:
 
 	static void SetCursor(sf::Cursor::Type cursorType)
 	{
-		window->setMouseCursor(sf::Cursor(cursorType));
+		// Check for if there is actually a change to do
+		if (currentCursor == cursorType) return;
+
+		// Store the current and previous cursor
+		previousCursor = currentCursor;
+		currentCursor = cursorType;
+
+		window->setMouseCursor(sf::Cursor(currentCursor));
+	}
+
+	static void SetCursorToPrevious()
+	{
+		SetCursor(previousCursor);
 	}
 
 	static void ResetCursor()
 	{
-		window->setMouseCursor(sf::Cursor(sf::Cursor::Type::Arrow));
+		SetCursor(sf::Cursor::Type::Arrow);
 	}
 };

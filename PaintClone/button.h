@@ -10,7 +10,9 @@ protected:
 	// TODO: Don't set every frame
 	bool clicked = false;
 	bool previouslyClicked = false;
+
 	bool hovered = false;
+	bool previouslyHovered = false;
 
 	std::function<void()> callbackFunction;
 

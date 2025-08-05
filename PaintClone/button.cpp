@@ -25,11 +25,9 @@ void Button::Update()
 
 void Button::CheckForClicking()
 {
-	// Reset variables
 	// TODO: Don't do this every frame
 	previouslyClicked = clicked;
-	hovered = false;
-	clicked = false;
+	previouslyHovered = hovered;
 
 	// Check for if we did the shortcut
 	if (sf::Keyboard::isKeyPressed(shortcut))
@@ -42,12 +40,30 @@ void Button::CheckForClicking()
 	sf::Vector2f mousePosition = Program::GetMousePosition();
 
 	// Check for if we're being hovered
-	// TODO: Make the background color a bit darker if hovering
-	if (shape.getGlobalBounds().contains(mousePosition) == false) return;
-	hovered = true;
+	//? not using guard here because its a little clearer
+	if (shape.getGlobalBounds().contains(mousePosition) == false)
+	{
+		// We aren't hovering
+		hovered = false;
 
-	// Check for if we clicked on the button
-	clicked = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
+		// If we were just hovering then
+		// return to the previous cursor
+		if (previouslyHovered) Program::SetCursorToPrevious();
+	}
+	else
+	{
+		// We are now hovering
+		if (previouslyHovered == false)
+		{
+			// Say we're hovering and set the cursor
+			// to be the little pointer clicky one
+			hovered = true;
+			Program::SetCursor(sf::Cursor::Type::Hand);
+		}
+
+		// Check for if we clicked on the button
+		clicked = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
+	}
 }
 
 bool Button::IsClicked() { return clicked && previouslyClicked == false; }
