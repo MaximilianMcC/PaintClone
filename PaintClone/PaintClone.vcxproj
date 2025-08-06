@@ -144,6 +144,7 @@
     <ClCompile Include="canvas.cpp" />
     <ClCompile Include="circleTool.cpp" />
     <ClCompile Include="cursorTool.cpp" />
+    <ClCompile Include="dialogueHandler.cpp" />
     <ClCompile Include="imageButton.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="rectangleTool.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="circleTool.h" />
     <ClInclude Include="colors.h" />
     <ClInclude Include="cursorTool.h" />
+    <ClInclude Include="dialogueHandler.h" />
     <ClInclude Include="imageButton.h" />
     <ClInclude Include="ShapeTool.h" />
     <ClInclude Include="utils.h" />
