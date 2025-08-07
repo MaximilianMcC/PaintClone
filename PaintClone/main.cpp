@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-#include "program.h"
+#include "utils.h"
 #include "colors.h"
 
 // Things
@@ -23,7 +23,7 @@ int main()
 	sf::Clock deltaTimeClock = sf::Clock();
 
 	// Share data with whoever's keen
-	Program::Init(&deltaTime, &window);
+	Utils::Init(&deltaTime, &window);
 
 	// Load fonts and set the default color theme
 	AssetManager::LoadDefaultFont("arial", "Arial");

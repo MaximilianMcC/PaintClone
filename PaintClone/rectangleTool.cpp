@@ -3,12 +3,12 @@
 void RectangleTool::Select()
 {
 	// Switch the mouse cursor to be more representative of the shape
-	Program::SetCursor(sf::Cursor::Type::Cross);
+	Utils::SetCursor(sf::Cursor::Type::Cross);
 }
 
 void RectangleTool::Deselect()
 {
-	Program::ResetCursor();
+	Utils::ResetCursor();
 }
 
 void RectangleTool::Update()

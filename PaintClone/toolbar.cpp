@@ -113,7 +113,7 @@ void Toolbar::HandleEvent(sf::Event& event)
 void Toolbar::ResizeUi()
 {
 	// Get the new window size
-	sf::Vector2u windowSize = Program::GetWindow()->getSize();
+	sf::Vector2u windowSize = Utils::GetWindow()->getSize();
 
 	// The top one's width is the same as the window
 	toolSettings.setSize(sf::Vector2f(
@@ -140,8 +140,8 @@ void Toolbar::Update()
 void Toolbar::Draw()
 {
 	// Draw the background ui things
-	Program::GetWindow()->draw(toolSelector);
-	Program::GetWindow()->draw(toolSettings);
+	Utils::GetWindow()->draw(toolSelector);
+	Utils::GetWindow()->draw(toolSettings);
 
 	// Draw all the ui elements
 	for (UiElement* uiElement : uiElements) uiElement->Draw();
@@ -149,7 +149,7 @@ void Toolbar::Draw()
 	// Draw the selected tool
 	currentTool->Draw();
 
-	Program::GetWindow()->draw(*selectedToolText);
+	Utils::GetWindow()->draw(*selectedToolText);
 }
 
 void Toolbar::CleanUp()

@@ -42,8 +42,8 @@ void ImageButton::Draw()
 {
 	// Draw the background fill color
 	// TODO: Make this optional (turn it off)
-	Program::GetWindow()->draw(shape);
+	Utils::GetWindow()->draw(shape);
 
 	// Draw the actual image
-	Program::GetWindow()->draw(*texture);
+	Utils::GetWindow()->draw(*texture);
 }

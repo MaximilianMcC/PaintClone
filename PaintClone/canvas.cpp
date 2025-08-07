@@ -26,7 +26,7 @@ void Canvas::Start()
 	// Figure out how much room we've for the canvas to
 	// occupy, excluding the left and top bar ui things
 	// TODO: Add ui
-	sf::Vector2f availableSpace = static_cast<sf::Vector2f>(Program::GetWindow()->getSize());
+	sf::Vector2f availableSpace = static_cast<sf::Vector2f>(Utils::GetWindow()->getSize());
 	//! availableSpace.X -= leftToolBarSize.X;
 	//! availableSpace.Y -= topToolBarSize.Y;
 	
@@ -60,11 +60,11 @@ void Canvas::HandleEvent(sf::Event& event)
 void Canvas::Draw()
 {
 	// Draw the very bottom transparent thing
-	Program::GetWindow()->draw(*transparentSprite);
+	Utils::GetWindow()->draw(*transparentSprite);
 
 	// Draw all the layers
 	
-	// Program::GetWindow()->draw(*outputSprite);
+	// Utils::GetWindow()->draw(*outputSprite);
 }
 
 //? & is a fake c# out variable
@@ -72,13 +72,13 @@ void Canvas::Draw()
 bool Canvas::GetMousePosition(sf::Vector2f& position)
 {
 	// Get the mouse position as a vector2
-	position = Program::GetMousePosition();
+	position = Utils::GetMousePosition();
 
 	// Ensure the mouse is actually over the canvas
 	if (outputSprite->getGlobalBounds().contains(position) == false) return false;
 
 	// Account for the offset to find the actual position
-	position = Program::GetWindow()->mapPixelToCoords(static_cast<sf::Vector2i>(position));
+	position = Utils::GetWindow()->mapPixelToCoords(static_cast<sf::Vector2i>(position));
 	position -= outputSprite->getPosition() - outputSprite->getOrigin();
 
 	return true;

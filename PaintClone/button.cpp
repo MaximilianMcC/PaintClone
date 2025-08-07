@@ -37,7 +37,7 @@ void Button::CheckForClicking()
 	}
 
 	// Get the mouse position
-	sf::Vector2f mousePosition = Program::GetMousePosition();
+	sf::Vector2f mousePosition = Utils::GetMousePosition();
 
 	// Check for if we're being hovered
 	//? not using guard here because its a little clearer
@@ -48,7 +48,7 @@ void Button::CheckForClicking()
 
 		// If we were just hovering then
 		// return to the previous cursor
-		if (previouslyHovered) Program::SetCursorToPrevious();
+		if (previouslyHovered) Utils::SetCursorToPrevious();
 	}
 	else
 	{
@@ -57,7 +57,7 @@ void Button::CheckForClicking()
 		if (previouslyHovered == false)
 		{
 			// Set the cursor to be the clicky one
-			Program::SetCursor(sf::Cursor::Type::Hand, true);
+			Utils::SetCursor(sf::Cursor::Type::Hand, true);
 		}
 
 		// Check for if we clicked on the button
@@ -71,7 +71,7 @@ bool Button::IsHovered() { return hovered; }
 
 void Button::Draw()
 {
-	Program::GetWindow()->draw(shape);
+	Utils::GetWindow()->draw(shape);
 }
 
 void Button::SetCallback(std::function<void()> methodToCall)
