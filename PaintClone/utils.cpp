@@ -41,7 +41,7 @@ sf::Vector2f Utils::GetMousePosition()
 }
 
 // A temporary cursor will not be added to the previous cursor thing
-void Utils::SetCursor(sf::Cursor::Type cursorType, bool temporary = false, bool force = false)
+void Utils::SetCursor(sf::Cursor::Type cursorType, bool temporary, bool force)
 {
 	// Check for if there is actually a change to do
 	if (!force && currentCursor == cursorType) return;
