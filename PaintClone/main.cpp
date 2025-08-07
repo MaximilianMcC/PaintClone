@@ -14,20 +14,25 @@
 // TODO: Use const where applicable. Methods and whatnot idk
 int main()
 {
+	// Load fonts and set the default color theme
+	AssetManager::LoadDefaultFont("arial", "Arial");
+	Colors::Theme = Colors::HotdogStand;
+
 	// Setup the SFML window
 	sf::RenderWindow window(sf::VideoMode(sf::Vector2u(854, 480)), "Paitning rn");
 	window.setIcon(*AssetManager::LoadAndGetImage("icon", "./assets/icon.png"));
+	bool debug = true;
 
 	// Delta time setup
 	float deltaTime = 0.0f;
 	sf::Clock deltaTimeClock = sf::Clock();
 
+	// Fps setup
+	float fps = 0.0f;
+	sf::Text fpsCounter = sf::Text(*AssetManager::GetFont("arial"));
+
 	// Share data with whoever's keen
 	Utils::Init(&deltaTime, &window);
-
-	// Load fonts and set the default color theme
-	AssetManager::LoadDefaultFont("arial", "Arial");
-	Colors::Theme = Colors::HotdogStand;
 
 	// Load/register everything
 	// TODO: Most of these should probably be static but its worth it for `Thing`
@@ -39,9 +44,11 @@ int main()
 	// Main program loop
 	while (window.isOpen())
 	{
-		// Calculate delta time
+		// Calculate delta time and fps
 		//? Since a pointer was given we don't need to bother updating it
 		deltaTime = deltaTimeClock.restart().asSeconds();
+		fps = 1 / deltaTime;
+		fpsCounter.setString(std::to_string((int)fps) + " fps");
 
 		// Check for new events
 		while (const std::optional event = window.pollEvent())
@@ -72,6 +79,9 @@ int main()
 			for (Thing* thing : things) thing->HandleEvent(currentEvent);
 		}
 
+		// Check for if we wanna toggle debug mode
+		// if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Grave)) debug = !debug;
+
 		// Update everything
 		{
 			for (Thing* thing : things) thing->Update();
@@ -82,6 +92,7 @@ int main()
 		{
 			for (Thing* thing : things) thing->Draw();
 		}
+		if (debug) window.draw(fpsCounter);
 		window.display();
 	}
 
