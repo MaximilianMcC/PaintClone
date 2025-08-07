@@ -23,12 +23,16 @@ public:
 
 	static float GetDeltaTime();
 	static sf::RenderWindow* GetWindow();
+	static sf::Vector2f GetWindowSize();
 
 	// Get the mouse position relative to the window, and
 	// return it as a float rather that int
 	static sf::Vector2f GetMousePosition();
 
-	static void SetCursor(sf::Cursor::Type cursorType, bool temporary = false, bool force = false);
+	static void SetCursor(sf::Cursor::Type cursorType, bool temporary = false, bool force = true);
 	static void SetCursorToPrevious();
 	static void ResetCursor();
+
+	static void PrintVector(sf::Vector2f vector);
+	static void PrintVector(sf::Vector2u vector);
 };

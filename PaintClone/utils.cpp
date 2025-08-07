@@ -32,6 +32,11 @@ sf::RenderWindow* Utils::GetWindow()
 	return window;
 }
 
+sf::Vector2f Utils::GetWindowSize()
+{
+	return static_cast<sf::Vector2f>(window->getSize());
+}
+
 // Get the mouse position relative to the window, and
 // return it as a float rather that int
 sf::Vector2f Utils::GetMousePosition()
@@ -97,4 +102,15 @@ void Utils::ResetCursor()
 {
 	SetCursor(sf::Cursor::Type::Arrow);
 	usingTemporaryCursor = false;
+}
+
+
+
+void Utils::PrintVector(sf::Vector2f vector)
+{
+	std::cout << "<" << vector.x << ", " << vector.y << ">" << std::endl;;
+}
+void Utils::PrintVector(sf::Vector2u vector)
+{
+	std::cout << "<" << vector.x << ", " << vector.y << ">" << std::endl;;
 }
