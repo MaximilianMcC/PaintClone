@@ -5,10 +5,11 @@
 class Canvas : public Thing
 {
 private:
-	std::optional<sf::Sprite> outputSprite;
+	sf::View camera;
+
 	sf::RenderTexture renderTexture;
-	sf::Vector2f size;
-	sf::Vector2f renderPosition;
+	std::optional<sf::Sprite> sprite;
+	sf::Vector2f canvasSize;
 
 	//? Is made to be the same size as the canvas is
 	sf::RenderTexture transparentRenderTexture;

@@ -7,36 +7,25 @@ Canvas::Canvas()
 
 void Canvas::Start()
 {
-	size = sf::Vector2f(1920, 1080);
-	sf::Vector2u canvasSize = static_cast<sf::Vector2u>(size);
+	// Default canvas size
+	canvasSize = sf::Vector2f(1920, 1440);
+	
+	// Camera setup (so we can pan and zoom & whatnot)
+	camera.setCenter(canvasSize / 2.0f);
+	camera.setSize(canvasSize);
 
-	// Set the transparent thingy to
-	// be the same size as the canvas
-	transparentRenderTexture = sf::RenderTexture(canvasSize);
+	// Make the canvas render texture and sprite
+	renderTexture = sf::RenderTexture(static_cast<sf::Vector2u>(canvasSize));
+	sprite = sf::Sprite(renderTexture.getTexture());
+
+	// Make the background render texture and sprite
+	transparentRenderTexture = sf::RenderTexture(renderTexture.getSize());
+	transparentSprite = sf::Sprite(transparentRenderTexture.getTexture());
+
+	//! debug
+	renderTexture.clear(sf::Color::Magenta);
 	RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPattern();
-
-	// Create the render texture so we can draw
-	//? When you add layers, just draw in the correct order instead of multiple render textures
-	renderTexture = sf::RenderTexture(canvasSize);
 	renderTexture.display();
-	
-	// Make the sprite so we can actually render the render texture
-	outputSprite = sf::Sprite(renderTexture.getTexture());
-
-	// Figure out how much room we've for the canvas to
-	// occupy, excluding the left and top bar ui things
-	// TODO: Add ui
-	sf::Vector2f availableSpace = static_cast<sf::Vector2f>(Utils::GetWindow()->getSize());
-	//! availableSpace.X -= leftToolBarSize.X;
-	//! availableSpace.Y -= topToolBarSize.Y;
-	
-	// Set the origin to be in the centre
-	// TODO: Just use maths (could be easier for panning/zooming)
-	outputSprite->setOrigin(outputSprite->getLocalBounds().size / 2.0f);
-
-	// Place the canvas in the centre by default
-	renderPosition = availableSpace / 2.0f;
-	outputSprite->setPosition(renderPosition);
 }
 
 // TODO: Don't put event definitions in the if statement
@@ -49,22 +38,15 @@ void Canvas::HandleEvent(sf::Event& event)
 		const float delta = mouseEvent->delta;
 		Zoom(delta);
 	}
-
-	// Check for if we've resized
-	if (event.is<sf::Event::Resized>())
-	{
-
-	}
 }
 
 void Canvas::Draw()
 {
-	// Draw the very bottom transparent thing
-	Utils::GetWindow()->draw(*transparentSprite);
-
-	// Draw all the layers
-	
-	// Utils::GetWindow()->draw(*outputSprite);
+	// Draw the actual canvas
+	Utils::GetWindow()->setView(camera);
+		Utils::GetWindow()->draw(*transparentSprite);
+		Utils::GetWindow()->draw(*sprite);
+	Utils::GetWindow()->setView(Utils::GetWindow()->getDefaultView());
 }
 
 //? & is a fake c# out variable
@@ -75,11 +57,11 @@ bool Canvas::GetMousePosition(sf::Vector2f& position)
 	position = Utils::GetMousePosition();
 
 	// Ensure the mouse is actually over the canvas
-	if (outputSprite->getGlobalBounds().contains(position) == false) return false;
+	if (sprite->getGlobalBounds().contains(position) == false) return false;
 
 	// Account for the offset to find the actual position
 	position = Utils::GetWindow()->mapPixelToCoords(static_cast<sf::Vector2i>(position));
-	position -= outputSprite->getPosition() - outputSprite->getOrigin();
+	position -= sprite->getPosition() - sprite->getOrigin();
 
 	return true;
 }
@@ -92,7 +74,7 @@ void Canvas::RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPatt
 {
 	// The size of a square should always be 5% of the width of the screen
 	// TODO: Maybe hardcode for specific monitor sizes?
-	float screenSizeToPixelRatio = 0.005f;
+	const float screenSizeToPixelRatio = 0.005f;
 	sf::Vector2u screenSize = sf::VideoMode::getDesktopMode().size;
 	sf::Vector2f squareSize = sf::Vector2f(
 		(float)screenSize.x * screenSizeToPixelRatio,
@@ -100,8 +82,8 @@ void Canvas::RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPatt
 	);
 
 	// Figure out how many rows/columns are needed
-	int rows = (int)(size.x / squareSize.x);
-	int columns = (int)(size.y / squareSize.y);
+	const int rows = (int)(canvasSize.x / squareSize.x);
+	const int columns = (int)(canvasSize.y / squareSize.y);
 
 	// The two colors to use for transparency
 	// TODO: Dark/light theme alternatives
@@ -136,9 +118,9 @@ void Canvas::RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPatt
 	// 'Bake' the pattern, and chuck it on a texture
 	// TODO: Don't make a new sprite every time. Just change texture
 	transparentRenderTexture.display();
-	transparentSprite = sf::Sprite(transparentRenderTexture.getTexture());
-	//? transparentSprite->setTexture(transparentRenderTexture.getTexture());
+	transparentSprite->setTexture(transparentRenderTexture.getTexture());
 }
+
 
 
 
@@ -149,9 +131,9 @@ void Canvas::Zoom(float delta)
 	// Get how much we're gonna zoom
 	const float zoomMultiplier = 0.05f;
 	const float zoom = delta * zoomMultiplier;
-	const sf::Vector2f newZoom = outputSprite->getScale() + sf::Vector2f(zoom, zoom);
+	const sf::Vector2f newZoom = sprite->getScale() + sf::Vector2f(zoom, zoom);
 
 	// Resize the canvas to zoom
-	outputSprite->setScale(newZoom);
+	sprite->setScale(newZoom);
 	RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPattern();
 }
