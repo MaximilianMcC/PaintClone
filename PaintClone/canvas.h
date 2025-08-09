@@ -16,7 +16,8 @@ private:
 	std::optional<sf::Sprite> transparentSprite;
 	void RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPattern();
 
-	void Zoom(float delta = 0);
+	void Zoom(float delta);
+	void Pan(float xDelta, float yDelta);
 
 public:
 	Canvas();

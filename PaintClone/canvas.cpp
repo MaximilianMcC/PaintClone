@@ -58,10 +58,10 @@ void Canvas::HandleEvent(sf::Event& event)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LAlt)) Zoom(delta);
 
 		// ctrl to horizontally scroll/pan
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl)) {}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl)) Pan(delta, 0);
 
 		// Normal zoom to vertically scroll/pan
-		else {}
+		else Pan(0, delta);
 	}
 }
 
@@ -95,6 +95,15 @@ void Canvas::Zoom(float delta)
 
 	// Ensure you can never zoom to the negatives (will flip the canvas (bad))
 	if ((int)camera.getSize().x <= 0) camera.setSize(previousScale);
+}
+
+void Canvas::Pan(float xDelta, float yDelta)
+{
+	const float moveSpeed = 60.0f;
+	camera.move(sf::Vector2f(
+		moveSpeed * -xDelta,
+		moveSpeed * yDelta
+	));
 }
 
 // TODO: Call this every time we resize
