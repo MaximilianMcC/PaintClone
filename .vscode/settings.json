@@ -31,6 +31,7 @@
 		"map": "cpp",
 		"xstring": "cpp",
 		"string": "cpp",
-		"functional": "cpp"
+		"functional": "cpp",
+		"optional": "cpp"
 	}
 }
