@@ -42,11 +42,15 @@ void Canvas::HandleEvent(sf::Event& event)
 
 void Canvas::Draw()
 {
-	// Draw the actual canvas
+	// Switch to drawing with the canvases camera
+	sf::View previousView = Utils::GetWindow()->getView();
 	Utils::GetWindow()->setView(camera);
+	{
 		Utils::GetWindow()->draw(*transparentSprite);
 		Utils::GetWindow()->draw(*sprite);
-	Utils::GetWindow()->setView(Utils::GetWindow()->getDefaultView());
+	}
+	// Return to the 'normal' camera
+	Utils::GetWindow()->setView(previousView);
 }
 
 //? & is a fake c# out variable
@@ -74,7 +78,7 @@ void Canvas::RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPatt
 {
 	// The size of a square should always be 5% of the width of the screen
 	// TODO: Maybe hardcode for specific monitor sizes?
-	const float screenSizeToPixelRatio = 0.005f;
+	const float screenSizeToPixelRatio = 0.05f;
 	sf::Vector2u screenSize = sf::VideoMode::getDesktopMode().size;
 	sf::Vector2f squareSize = sf::Vector2f(
 		(float)screenSize.x * screenSizeToPixelRatio,
@@ -117,8 +121,8 @@ void Canvas::RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPatt
 
 	// 'Bake' the pattern, and chuck it on a texture
 	// TODO: Don't make a new sprite every time. Just change texture
-	transparentRenderTexture.display();
-	transparentSprite->setTexture(transparentRenderTexture.getTexture());
+	// transparentRenderTexture.display();
+	// transparentSprite->setTexture(transparentRenderTexture.getTexture());
 }
 
 
