@@ -13,6 +13,30 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Tools">
+      <UniqueIdentifier>{06c6358f-639b-4771-b05c-e09cccfde36b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tools">
+      <UniqueIdentifier>{7e1d2131-0140-4d97-b08e-7513e600f1e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{79abc9e4-0e03-4fc7-8399-b58a6d138fb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI\Buttons">
+      <UniqueIdentifier>{d15cac2f-4117-4900-8020-8f9c77dc814f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{c21ebc07-0e5e-48fa-a392-5323cd8c27ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{2a6fa15a-0b5b-41f2-a27d-6ac2023b54e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UI\Buttons">
+      <UniqueIdentifier>{bcece712-818f-44eb-8888-d4d20b5f0afc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{7ae50956-e84e-47da-a3c2-8764e07763ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,64 +45,70 @@
     <ClCompile Include="canvas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="toolbar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="assetManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="imageButton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cursorTool.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeTool.cpp">
+      <Filter>Source Files\Tools</Filter>
     </ClCompile>
     <ClCompile Include="rectangleTool.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="toolbar.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="imageButton.cpp">
+      <Filter>Source Files\UI\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="button.cpp">
+      <Filter>Source Files\UI\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="tool.cpp">
+      <Filter>Source Files\Tools</Filter>
     </ClCompile>
     <ClCompile Include="utils.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="assetManager.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="canvas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="thing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="toolbar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="assetManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imageButton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cursorTool.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tools</Filter>
     </ClInclude>
     <ClInclude Include="rectangleTool.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeTool.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="tool.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="toolbar.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="imageButton.h">
+      <Filter>Header Files\UI\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="button.h">
+      <Filter>Header Files\UI\Buttons</Filter>
     </ClInclude>
     <ClInclude Include="colors.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="assetManager.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="thing.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

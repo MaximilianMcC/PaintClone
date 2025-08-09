@@ -146,6 +146,7 @@
     <ClCompile Include="imageButton.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="rectangleTool.cpp" />
+    <ClCompile Include="ShapeTool.cpp" />
     <ClCompile Include="tool.cpp" />
     <ClCompile Include="toolbar.cpp" />
     <ClCompile Include="utils.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="colors.h" />
     <ClInclude Include="cursorTool.h" />
     <ClInclude Include="imageButton.h" />
+    <ClInclude Include="ShapeTool.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="rectangleTool.h" />
     <ClInclude Include="thing.h" />
