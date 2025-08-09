@@ -11,12 +11,16 @@ void Canvas::Start()
 	canvasSize = sf::Vector2f(1920, 1440);
 	
 	// Camera setup (so we can pan and zoom & whatnot)
-	camera.setCenter(canvasSize / 2.0f);
 	camera.setSize(canvasSize);
+	camera.setCenter(canvasSize / 2.0f);
 
 	// Make the canvas render texture and sprite
 	renderTexture = sf::RenderTexture(static_cast<sf::Vector2u>(canvasSize));
 	sprite = sf::Sprite(renderTexture.getTexture());
+
+	// Place the canvas in the centre of the canvas camera
+	// sprite->setOrigin(camera.getCenter());
+	// sprite->setPosition(static_cast<sf::Vector2f>(Utils::GetWindow()->getSize()) / 2.0f);
 
 	// Make the background render texture and sprite
 	transparentRenderTexture = sf::RenderTexture(renderTexture.getSize());
@@ -26,18 +30,6 @@ void Canvas::Start()
 	renderTexture.clear(sf::Color::Magenta);
 	RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPattern();
 	renderTexture.display();
-}
-
-// TODO: Don't put event definitions in the if statement
-void Canvas::HandleEvent(sf::Event& event)
-{
-	// Check for if we've scrolled
-	if (const sf::Event::MouseWheelScrolled* mouseEvent = event.getIf<sf::Event::MouseWheelScrolled>())
-	{
-		// Get the scrolls delta
-		const float delta = mouseEvent->delta;
-		Zoom(delta);
-	}
 }
 
 void Canvas::Draw()
@@ -52,6 +44,27 @@ void Canvas::Draw()
 	// Return to the 'normal' camera
 	Utils::GetWindow()->setView(previousView);
 }
+
+// TODO: Don't put event definitions in the if statement
+void Canvas::HandleEvent(sf::Event& event)
+{
+	// Check for if we've scrolled
+	if (const sf::Event::MouseWheelScrolled* mouseEvent = event.getIf<sf::Event::MouseWheelScrolled>())
+	{
+		// Get the scrolls delta
+		const float delta = mouseEvent->delta;
+
+		// Hold alt while scrolling to zoom
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LAlt)) Zoom(delta);
+
+		// ctrl to horizontally scroll/pan
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl)) {}
+
+		// Normal zoom to vertically scroll/pan
+		else {}
+	}
+}
+
 
 //? & is a fake c# out variable
 // Get the mouse position relative to the canvas (output sprite)
@@ -68,6 +81,20 @@ bool Canvas::GetMousePosition(sf::Vector2f& position)
 	position -= sprite->getPosition() - sprite->getOrigin();
 
 	return true;
+}
+
+void Canvas::Zoom(float delta)
+{
+	// Calculate if we wanna zoom in/out
+	float zoom = 1.1f;
+	if (delta > 0) zoom = 1.0f / zoom;
+
+	// Actualyl zoom
+	sf::Vector2f previousScale = camera.getSize();
+	camera.zoom(zoom);
+
+	// Ensure you can never zoom to the negatives (will flip the canvas (bad))
+	if ((int)camera.getSize().x <= 0) camera.setSize(previousScale);
 }
 
 // TODO: Call this every time we resize
@@ -123,21 +150,4 @@ void Canvas::RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPatt
 	// TODO: Don't make a new sprite every time. Just change texture
 	// transparentRenderTexture.display();
 	// transparentSprite->setTexture(transparentRenderTexture.getTexture());
-}
-
-
-
-
-
-// TODO: Make a float for scale but idk its just like duplicated data
-void Canvas::Zoom(float delta)
-{
-	// Get how much we're gonna zoom
-	const float zoomMultiplier = 0.05f;
-	const float zoom = delta * zoomMultiplier;
-	const sf::Vector2f newZoom = sprite->getScale() + sf::Vector2f(zoom, zoom);
-
-	// Resize the canvas to zoom
-	sprite->setScale(newZoom);
-	RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPattern();
 }
