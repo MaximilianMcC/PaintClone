@@ -1,19 +1,15 @@
 #pragma once
 #include "tool.h"
+#include "shapeTool.h"
 
-class RectangleTool : public Tool
-{
+class RectangleTool : public ShapeTool
+{	
+private:
+	void MakeNewShape();
+	void ResizeShape(sf::Vector2f newSize);
+	
 public:
 	RectangleTool(std::string displayName, std::string descriptionAndTutorial)
-	: Tool(displayName, descriptionAndTutorial) { }
-
-	virtual void Update() override;
-	virtual void HandleEvent(sf::Event &currentEvent) override { }
-	virtual void CleanUp() override { }
-	virtual void Draw() override { }
-
-	virtual void Select();
-	virtual void Deselect();
-	virtual void DrawToCanvas() { }
+	: ShapeTool(displayName, descriptionAndTutorial) { }
 };
 

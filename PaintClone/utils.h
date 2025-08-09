@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include "canvas.h"
 #include <iostream>
 
 // TODO: Get rid of this class and do it in utils
@@ -11,6 +12,8 @@ private:
 	static float* deltaTime;
 	static sf::RenderWindow* window;
 
+	static Canvas* mainCanvas;
+
 	static sf::Cursor::Type currentCursor;
 	static sf::Cursor::Type previousCursor;
 	static bool usingTemporaryCursor;
@@ -20,6 +23,9 @@ public:
 	// TODO: Don't write in H
 	// TODO: Make a singleton or something idk
 	static void Init(float* deltaTimePointer, sf::RenderWindow* renderWindowPointer);
+
+	static Canvas* GetCanvas();
+	static void SetCanvas(Canvas *canvas);
 
 	static float GetDeltaTime();
 	static sf::RenderWindow* GetWindow();

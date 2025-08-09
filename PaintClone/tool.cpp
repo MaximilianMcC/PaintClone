@@ -20,3 +20,8 @@ void Tool::SetInfo(std::string newInfo)
 {
 	info = newInfo;
 }
+
+void Tool::DrawOnCanvas()
+{
+	// Utils::GetCanvas().
+}

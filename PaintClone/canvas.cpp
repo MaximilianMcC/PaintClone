@@ -27,7 +27,7 @@ void Canvas::Start()
 	transparentSprite = sf::Sprite(transparentRenderTexture.getTexture());
 
 	//! debug
-	renderTexture.clear(sf::Color::Magenta);
+	renderTexture.clear(sf::Color::White);
 	RegenerateAndUpdateDynamicCanvasTransparentBackgroundSpriteGridPattern();
 	renderTexture.display();
 }

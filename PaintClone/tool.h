@@ -19,6 +19,7 @@ public:
 	virtual void Select() { }
 	virtual void Deselect() { }
 	virtual void DrawToCanvas() { }
+	virtual void DrawOnCanvas();
 
 	std::string GetName();
 	

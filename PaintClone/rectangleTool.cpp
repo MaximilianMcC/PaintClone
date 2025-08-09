@@ -1,17 +1,12 @@
 #include "rectangleTool.h"
 
-void RectangleTool::Select()
+void RectangleTool::MakeNewShape()
 {
-	// Switch the mouse cursor to be more representative of the shape
-	Utils::SetCursor(sf::Cursor::Type::Cross);
+	shape = new sf::RectangleShape();
 }
 
-void RectangleTool::Deselect()
+void RectangleTool::ResizeShape(sf::Vector2f newSize)
 {
-	Utils::ResetCursor();
-}
-
-void RectangleTool::Update()
-{
-	
+	// Cast the normal shape to a rectnagle, then set its size
+	static_cast<sf::RectangleShape*>(shape)->setSize(newSize);
 }
