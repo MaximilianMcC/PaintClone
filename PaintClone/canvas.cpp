@@ -102,7 +102,7 @@ void Canvas::Pan(float xDelta, float yDelta)
 	const float moveSpeed = 60.0f;
 	camera.move(sf::Vector2f(
 		moveSpeed * -xDelta,
-		moveSpeed * yDelta
+		moveSpeed * -yDelta
 	));
 }
 
