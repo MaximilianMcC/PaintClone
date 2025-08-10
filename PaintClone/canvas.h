@@ -29,4 +29,6 @@ public:
 	// Get the mouse position relative to the canvas
 	//? Returns false if the mouse is not on the canvas
 	bool GetMousePosition(sf::Vector2f& position);
+
+	sf::RenderTexture* GetRenderTexture();
 };

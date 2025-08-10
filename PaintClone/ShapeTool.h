@@ -1,4 +1,5 @@
 #pragma once
+#include "canvas.h"
 #include "ShapeTool.h"
 #include "tool.h"
 
@@ -23,6 +24,6 @@ public:
 	
 	virtual void Select();
 	virtual void Deselect();
-	virtual void DrawToCanvas() { }
+	virtual void DrawOnCanvas();
 };
 

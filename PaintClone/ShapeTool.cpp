@@ -55,9 +55,10 @@ void ShapeTool::Update()
 	ResizeShape(newSize);
 }
 
-void ShapeTool::DrawToCanvas()
+void ShapeTool::DrawOnCanvas()
 {
-	
+	// Draw the shape to the canvas (wow)
+	Utils::GetCanvas()->GetRenderTexture()->draw(*shape);
 }
 
 void ShapeTool::CleanUp()

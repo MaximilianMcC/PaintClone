@@ -1,7 +1,9 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "canvas.h"
 #include <iostream>
+
+// Stop circular dependncy stuff
+class Canvas;
 
 // TODO: Get rid of this class and do it in utils
 // TODO: Write this stuff in cpp files. Gotten too large (cursor)

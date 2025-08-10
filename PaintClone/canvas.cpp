@@ -106,6 +106,11 @@ void Canvas::Pan(float xDelta, float yDelta)
 	));
 }
 
+sf::RenderTexture* Canvas::GetRenderTexture()
+{
+	return &renderTexture;
+};
+
 // TODO: Call this every time we resize
 // TODO: Only call this if its visible? 
 // TODO: Maybe just make this edit a private render texture or something
