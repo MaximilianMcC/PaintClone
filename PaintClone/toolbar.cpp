@@ -1,6 +1,7 @@
 #include "toolbar.h"
 #include "cursorTool.h"
 #include "rectangleTool.h"
+#include "circleTool.h"
 
 Toolbar::Toolbar()
 {
@@ -50,17 +51,17 @@ void Toolbar::CreateToolsAndButtons(float size)
 	// TODO: Don't use scopes like this
 	// Cursor tool
 	{
-		CursorTool* cursorTool = new CursorTool("Cursor", "hi");
-		ImageButton* cursorButton = new ImageButton("./assets/cursor.png", buttonSize, position, sf::Keyboard::Key::V);
-		cursorButton->SetCallback(SetTool(cursorTool));
+		CursorTool* tool = new CursorTool("Cursor", "hi");
+		ImageButton* button = new ImageButton("./assets/cursor.png", buttonSize, position, sf::Keyboard::Key::V);
+		button->SetCallback(SetTool(tool));
 
 		// Move the button down a bit
 		position.y += padding + buttonDimension;
 
 		// Make coppies of the two things and
 		// place them in the lists
-		uiElements.push_back(cursorButton);
-		tools.push_back(cursorTool);
+		uiElements.push_back(button);
+		tools.push_back(tool);
 
 		// By default the cursor tool is the current one
 		//? only kinda acceptable to use [0] here idk
@@ -71,17 +72,32 @@ void Toolbar::CreateToolsAndButtons(float size)
 
 	// Rectangle tool
 	{
-		RectangleTool* rectangleTool = new RectangleTool("Rectangle", "Click and drag to resize");
-		ImageButton* rectangleButton = new ImageButton("./assets/rectangle.png", buttonSize, position, sf::Keyboard::Key::R);
-		rectangleButton->SetCallback(SetTool(rectangleTool));
+		RectangleTool* tool = new RectangleTool("Rectangle", "Click and drag to resize");
+		ImageButton* button = new ImageButton("./assets/rectangle.png", buttonSize, position, sf::Keyboard::Key::R);
+		button->SetCallback(SetTool(tool));
 
 		// Move the button down a bit
 		position.y += padding + buttonDimension;
 
 		// Make coppies of the two things and
 		// place them in the lists
-		uiElements.push_back(rectangleButton);
-		tools.push_back(rectangleTool);
+		uiElements.push_back(button);
+		tools.push_back(tool);
+	}
+
+	// Circle tool
+	{
+		CircleTool* tool = new CircleTool("Circle", "Click and drag to resize");
+		ImageButton* button = new ImageButton("./assets/circle.png", buttonSize, position, sf::Keyboard::Key::C);
+		button->SetCallback(SetTool(tool));
+
+		// Move the button down a bit
+		position.y += padding + buttonDimension;
+
+		// Make coppies of the two things and
+		// place them in the lists
+		uiElements.push_back(button);
+		tools.push_back(tool);
 	}
 }
 
