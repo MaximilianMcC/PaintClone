@@ -52,7 +52,10 @@ void ShapeTool::Update()
 		mousePosition.x - shape->getPosition().x,
 		mousePosition.y - shape->getPosition().y
 	);
+
+	// Resize the shape accordingly, and draw it on the canvas
 	ResizeShape(newSize);
+	DrawOnCanvas();
 }
 
 void ShapeTool::DrawOnCanvas()

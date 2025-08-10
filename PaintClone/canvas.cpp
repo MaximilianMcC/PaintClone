@@ -18,10 +18,6 @@ void Canvas::Start()
 	renderTexture = sf::RenderTexture(static_cast<sf::Vector2u>(canvasSize));
 	sprite = sf::Sprite(renderTexture.getTexture());
 
-	// Place the canvas in the centre of the canvas camera
-	// sprite->setOrigin(camera.getCenter());
-	// sprite->setPosition(static_cast<sf::Vector2f>(Utils::GetWindow()->getSize()) / 2.0f);
-
 	// Make the background render texture and sprite
 	transparentRenderTexture = sf::RenderTexture(renderTexture.getSize());
 	transparentSprite = sf::Sprite(transparentRenderTexture.getTexture());
@@ -77,7 +73,7 @@ bool Canvas::GetMousePosition(sf::Vector2f& position)
 	if (sprite->getGlobalBounds().contains(position) == false) return false;
 
 	// Account for the offset to find the actual position
-	position = Utils::GetWindow()->mapPixelToCoords(static_cast<sf::Vector2i>(position));
+	position = Utils::GetWindow()->mapPixelToCoords(static_cast<sf::Vector2i>(position), camera);
 	position -= sprite->getPosition() - sprite->getOrigin();
 
 	return true;
