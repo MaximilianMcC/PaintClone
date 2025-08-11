@@ -7,7 +7,7 @@ class ShapeTool : public Tool
 {
 	
 protected:
-	sf::Shape* shape;
+	std::unique_ptr<sf::Shape> shape;
 	bool makingShapeRn;
 
 	virtual void MakeNewShape() = 0;
@@ -19,7 +19,7 @@ public:
 
 	virtual void Update();
 	virtual void HandleEvent(sf::Event &currentEvent) override { }
-	virtual void CleanUp();
+	virtual void CleanUp() { }
 	virtual void Draw() override { }
 	
 	virtual void Select();

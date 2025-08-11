@@ -2,7 +2,7 @@
 
 void CircleTool::MakeNewShape()
 {
-	shape = new sf::CircleShape();
+	shape = std::make_unique<sf::CircleShape>();
 }
 
 void CircleTool::ResizeShape(sf::Vector2f newSize)
@@ -11,5 +11,5 @@ void CircleTool::ResizeShape(sf::Vector2f newSize)
 	float newRadius = std::max(newSize.x, newSize.y) / 2.0f;
 
 	// Cast the normal shape to a circle, then set its radius
-	static_cast<sf::CircleShape*>(shape)->setRadius(newRadius);
+	static_cast<sf::CircleShape*>(shape.get())->setRadius(newRadius);
 }

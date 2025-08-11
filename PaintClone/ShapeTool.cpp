@@ -22,9 +22,10 @@ void ShapeTool::Update()
 			// We've finished making the shape.
 			// Place it on the actual canvas
 			// TODO: Don't rewrite the actual drawing code
-			Utils::GetMainCanvas()->GetRenderTexture()->draw(*shape);
-			Utils::GetMainCanvas()->GetRenderTexture()->display();
-			Utils::GetMainCanvas()->GetRenderTexture()->getTexture().copyToImage().saveToFile("debug.png");
+			sf::RenderTexture* canvas = Utils::GetMainCanvas()->GetRenderTexture();
+			canvas->draw(*shape);
+			Utils::GetMainCanvas()->Bake();
+			// Utils::GetMainCanvas()->GetRenderTexture()->getTexture().copyToImage().saveToFile("debug.png");
 
 			// Clear the working render texture for when
 			// we wanna draw the next shape
@@ -68,17 +69,10 @@ void ShapeTool::Update()
 
 void ShapeTool::DrawOnCanvas()
 {
-	sf::RenderTexture *canvas = Utils::GetWorkingCanvas()->GetRenderTexture();
+	sf::RenderTexture* canvas = Utils::GetWorkingCanvas()->GetRenderTexture();
 
 	// Draw the shape to the canvas every frame
 	canvas->clear(sf::Color::Transparent);
 	canvas->draw(*shape);
 	canvas->display();
-}
-
-void ShapeTool::CleanUp()
-{
-	delete shape;
-	shape = nullptr;
-	std::cout << "make sure ts runs" << std::endl;
 }

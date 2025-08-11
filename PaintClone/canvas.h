@@ -27,4 +27,5 @@ public:
 	bool GetMousePosition(sf::Vector2f& position);
 
 	sf::RenderTexture* GetRenderTexture();
+	void Bake();
 };

@@ -8,7 +8,7 @@ Canvas::Canvas()
 void Canvas::Start()
 {
 	// Default canvas size
-	canvasSize = sf::Vector2f(1920, 1440);
+	canvasSize = sf::Vector2f(1920, 1080);
 	
 	// Camera setup (so we can pan and zoom & whatnot)
 	camera.setSize(canvasSize);
@@ -16,8 +16,8 @@ void Canvas::Start()
 
 	// Make the canvas render texture and sprite
 	displayRenderTexture = sf::RenderTexture(static_cast<sf::Vector2u>(canvasSize));
-	displaySprite.emplace(displayRenderTexture.getTexture());
-	displaySprite->setTexture(displayRenderTexture.getTexture());
+	displaySprite = sf::Sprite(displayRenderTexture.getTexture());
+	displaySprite->setScale(sf::Vector2f(1.0f, 1.0f));
 
 	// Make the working render texture so the tools can draw on it
 	workingRenderTexture = sf::RenderTexture(displayRenderTexture.getSize());
@@ -110,3 +110,10 @@ sf::RenderTexture* Canvas::GetRenderTexture()
 {
 	return &displayRenderTexture;
 };
+
+// Copy the contents of the working render texture to the display one
+// then update the display sprite (so we can see it)
+void Canvas::Bake()
+{
+	displayRenderTexture.display();
+}
