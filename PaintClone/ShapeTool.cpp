@@ -25,12 +25,6 @@ void ShapeTool::Update()
 			sf::RenderTexture* canvas = Utils::GetCanvas()->GetDisplayCanvas();
 			canvas->draw(*shape);
 			canvas->display();
-			// Utils::GetMainCanvas()->GetRenderTexture()->getTexture().copyToImage().saveToFile("debug.png");
-
-			// Clear the working render texture for when
-			// we wanna draw the next shape
-			// Utils::GetWorkingCanvas()->GetRenderTexture()->clear(sf::Color::Transparent);
-			// Utils::GetWorkingCanvas()->GetRenderTexture()->display();
 		}
 
 		// Say that we've finished now
@@ -61,6 +55,9 @@ void ShapeTool::Update()
 		mousePosition.x - shape->getPosition().x,
 		mousePosition.y - shape->getPosition().y
 	);
+
+	// If we're holding down shift then keep it 'sterotypical'
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift)) newSize.y = newSize.x;
 
 	// Resize the shape accordingly, and draw it on the canvas
 	ResizeShape(newSize);
