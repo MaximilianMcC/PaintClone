@@ -15,6 +15,7 @@ private:
 	static sf::RenderWindow* window;
 
 	static Canvas* mainCanvas;
+	static Canvas* workingCanvas;
 
 	static sf::Cursor::Type currentCursor;
 	static sf::Cursor::Type previousCursor;
@@ -26,8 +27,11 @@ public:
 	// TODO: Make a singleton or something idk
 	static void Init(float* deltaTimePointer, sf::RenderWindow* renderWindowPointer);
 
-	static Canvas* GetCanvas();
+	static Canvas* GetMainCanvas();
 	static void SetCanvas(Canvas *canvas);
+
+	static Canvas* GetWorkingCanvas();
+	static void SetWorkingCanvas(Canvas *canvas);
 
 	static float GetDeltaTime();
 	static sf::RenderWindow* GetWindow();

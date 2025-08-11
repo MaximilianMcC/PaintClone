@@ -5,7 +5,9 @@
 
 float* Utils::deltaTime = nullptr;
 sf::RenderWindow* Utils::window = nullptr;
+
 Canvas* Utils::mainCanvas = nullptr;
+Canvas* Utils::workingCanvas = nullptr;
 
 sf::Cursor::Type Utils::currentCursor = sf::Cursor::Type::Arrow;
 sf::Cursor::Type Utils::previousCursor = sf::Cursor::Type::Arrow;
@@ -23,9 +25,19 @@ void Utils::Init(float* deltaTimePointer, sf::RenderWindow* renderWindowPointer)
 	window = renderWindowPointer;
 }
 
-Canvas* Utils::GetCanvas()
+Canvas* Utils::GetMainCanvas()
 {
 	return mainCanvas;
+}
+
+Canvas* Utils::GetWorkingCanvas()
+{
+	return workingCanvas;
+}
+
+void Utils::SetWorkingCanvas(Canvas* canvas)
+{
+	workingCanvas = canvas;
 }
 
 void Utils::SetCanvas(Canvas* canvas)

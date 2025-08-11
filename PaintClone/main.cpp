@@ -16,7 +16,7 @@ int main()
 {
 	// Load fonts and set the default color theme
 	AssetManager::LoadDefaultFont("arial", "Arial");
-	Colors::Theme = Colors::Dark;
+	Colors::Theme = Colors::Light;
 
 	// Setup the SFML window
 	sf::RenderWindow window(sf::VideoMode(sf::Vector2u(854, 480)), "Paitning rn");
@@ -40,10 +40,6 @@ int main()
 	std::vector<Thing*> things;
 	things.push_back(new Canvas());
 	things.push_back(new Toolbar());
-
-	// TODO: Don't harcode
-	// TODO: Do another way
-	Utils::SetCanvas(static_cast<Canvas*>(things[0]));
 
 	// Main program loop
 	while (window.isOpen())
