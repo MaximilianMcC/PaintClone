@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <Windows.h>
-#include "program.h"
+#include "utils.h"
 
 class DialogueHandler
 {

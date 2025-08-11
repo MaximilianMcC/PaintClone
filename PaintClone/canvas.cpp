@@ -29,7 +29,6 @@ void Canvas::Start()
 
 	// Sharing is caring
 	Utils::SetCanvas(this);
-	Utils::SetWorkingCanvas(this);
 }
 
 void Canvas::Draw()
@@ -106,14 +105,12 @@ void Canvas::Pan(float xDelta, float yDelta)
 	));
 }
 
-sf::RenderTexture* Canvas::GetRenderTexture()
+sf::RenderTexture* Canvas::GetDisplayCanvas()
 {
 	return &displayRenderTexture;
 };
 
-// Copy the contents of the working render texture to the display one
-// then update the display sprite (so we can see it)
-void Canvas::Bake()
+sf::RenderTexture* Canvas::GetWorkingCanvas()
 {
-	displayRenderTexture.display();
-}
+	return &workingRenderTexture;
+};

@@ -22,9 +22,9 @@ void ShapeTool::Update()
 			// We've finished making the shape.
 			// Place it on the actual canvas
 			// TODO: Don't rewrite the actual drawing code
-			sf::RenderTexture* canvas = Utils::GetMainCanvas()->GetRenderTexture();
+			sf::RenderTexture* canvas = Utils::GetCanvas()->GetDisplayCanvas();
 			canvas->draw(*shape);
-			Utils::GetMainCanvas()->Bake();
+			canvas->display();
 			// Utils::GetMainCanvas()->GetRenderTexture()->getTexture().copyToImage().saveToFile("debug.png");
 
 			// Clear the working render texture for when
@@ -40,7 +40,7 @@ void ShapeTool::Update()
 	
 	// Check for if we're on the canvas rn
 	sf::Vector2f mousePosition;
-	if (Utils::GetMainCanvas()->GetMousePosition(mousePosition) == false) return;
+	if (Utils::GetCanvas()->GetMousePosition(mousePosition) == false) return;
 
 	// Check for if we were previously making a
 	// shape or if this is the first time making it
@@ -69,7 +69,7 @@ void ShapeTool::Update()
 
 void ShapeTool::DrawOnCanvas()
 {
-	sf::RenderTexture* canvas = Utils::GetWorkingCanvas()->GetRenderTexture();
+	sf::RenderTexture* canvas = Utils::GetCanvas()->GetWorkingCanvas();
 
 	// Draw the shape to the canvas every frame
 	canvas->clear(sf::Color::Transparent);
