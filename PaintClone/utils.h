@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include <iostream>
+#include <Windows.h>
 
 // Stop circular dependncy stuff
 class Canvas;
@@ -41,4 +42,7 @@ public:
 
 	static void PrintVector(sf::Vector2f vector);
 	static void PrintVector(sf::Vector2u vector);
+
+	static COLORREF sfmlColorToWin32(sf::Color color);
+	static sf::Color Win32ColorToSfml(COLORREF color);
 };

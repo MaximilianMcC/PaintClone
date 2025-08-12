@@ -127,3 +127,17 @@ void Utils::PrintVector(sf::Vector2u vector)
 {
 	std::cout << "<" << vector.x << ", " << vector.y << ">" << std::endl;;
 }
+
+COLORREF Utils::sfmlColorToWin32(sf::Color color)
+{
+	return RGB(color.r, color.g, color.b);
+}
+
+sf::Color Utils::Win32ColorToSfml(COLORREF color)
+{
+	return sf::Color(
+		GetRValue(color),
+		GetGValue(color),
+		GetBValue(color)
+	);
+}
