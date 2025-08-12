@@ -3,14 +3,9 @@
 ImageButton::ImageButton(std::string imagePath, sf::Vector2f size, sf::Vector2f position, sf::Keyboard::Key shortcutKey)
 : Button(size, position, Colors::Theme.BackgroundDark, shortcutKey)
 {
-	// Use the pointer address to ourselves as the image key
-	// TODO: Don't do this
-	//! Probably really really bad
-	std::string key = "button" + std::to_string((unsigned long)this);
-	std::cout << key << std::endl;
-
 	// Load a new texture and set it as our image
-	texture = sf::Sprite(*AssetManager::LoadAndGetTexture(key, imagePath));
+	//? Using the texture path as the key because its unique
+	texture = sf::Sprite(*AssetManager::LoadAndGetTexture(imagePath, imagePath));
 
 	// TODO: Don't rewrite (put in method)
 	// Set it to be the same as the 'normal' button
