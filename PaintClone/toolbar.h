@@ -9,13 +9,12 @@ class Toolbar : public Thing
 private:
 	sf::RectangleShape toolSelector;
 	sf::RectangleShape toolSettings;
-	Button* colorPickerButton;
 	
 	std::vector<UiElement*> uiElements;
 	std::vector<Tool*> tools;
 	Tool* currentTool;
 
-	void CreateToolsAndButtons(float columnWidth);
+	void CreateToolsAndButtons();
 
 	// TODO: Make this a UiElement
 	std::optional<sf::Text> selectedToolText;
@@ -31,5 +30,11 @@ public:
 	void ResizeUi();
 
 	std::function<void()> SetTool(Tool* tool);
-	std::function<void()> ChangeColor(Button* colorPickerButton);
+};
+
+static struct LayoutInfo
+{
+	static float Padding;
+	static float BaseSize;
+	static sf::Vector2f ButtonSize;
 };

@@ -143,6 +143,7 @@
     <ClCompile Include="button.cpp" />
     <ClCompile Include="canvas.cpp" />
     <ClCompile Include="circleTool.cpp" />
+    <ClCompile Include="colorPicker.cpp" />
     <ClCompile Include="cursorTool.cpp" />
     <ClCompile Include="dialogueHandler.cpp" />
     <ClCompile Include="imageButton.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="button.h" />
     <ClInclude Include="canvas.h" />
     <ClInclude Include="circleTool.h" />
+    <ClInclude Include="colorPicker.h" />
     <ClInclude Include="colors.h" />
     <ClInclude Include="cursorTool.h" />
     <ClInclude Include="dialogueHandler.h" />

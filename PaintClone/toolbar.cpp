@@ -5,6 +5,13 @@
 #include "circleTool.h"
 #include "lineTool.h"
 
+// TODO: Don't do this here idk. Put in utils
+float LayoutInfo::Padding;
+float LayoutInfo::BaseSize;
+sf::Vector2f LayoutInfo::ButtonSize;
+
+
+
 Toolbar::Toolbar()
 {
 	Start();
@@ -16,14 +23,15 @@ void Toolbar::Start()
 	//? idk what percentage it actually is (bad at maths)
 	// TODO: No magic numbers
 	sf::Vector2u screenSize = sf::VideoMode::getDesktopMode().size;
-	float size = screenSize.x / 30.0f;
+	LayoutInfo::BaseSize = screenSize.x / 30.0f;
+	LayoutInfo::Padding = LayoutInfo::BaseSize / 10.0f;
 
 	// Horizontal
-	toolSettings = sf::RectangleShape(sf::Vector2(0.0f, size));
+	toolSettings = sf::RectangleShape(sf::Vector2(0.0f, LayoutInfo::BaseSize));
 
 	// The vertical one is spawned beneath the settings one
-	toolSelector = sf::RectangleShape(sf::Vector2(size, 0.0f));
-	toolSelector.setPosition(sf::Vector2(0.0f, size));
+	toolSelector = sf::RectangleShape(sf::Vector2(LayoutInfo::BaseSize, 0.0f));
+	toolSelector.setPosition(sf::Vector2(0.0f, LayoutInfo::BaseSize));
 
 	// Set the colors
 	// TODO: Color themes
@@ -31,7 +39,7 @@ void Toolbar::Start()
 	toolSelector.setFillColor(Colors::Theme.BackgroundLight);
 
 	// Make all the buttons and tools
-	CreateToolsAndButtons(size);
+	CreateToolsAndButtons();
 
 	// Set initial dynamic sizes
 	ResizeUi();
@@ -41,14 +49,19 @@ void Toolbar::Start()
 	selectedToolText->setFillColor(Colors::Theme.Foreground);
 }
 
-void Toolbar::CreateToolsAndButtons(float size)
+void Toolbar::CreateToolsAndButtons()
 {
-	float padding = size / 10.0f;
+	// Just to make life easier
+	float size = LayoutInfo::BaseSize;
+	float padding = LayoutInfo::Padding;
 
 	// Get the size and position of the buttons
 	float buttonDimension = size - (padding * 2.0f);
 	sf::Vector2f buttonSize = sf::Vector2f(buttonDimension, buttonDimension);
 	sf::Vector2f position = sf::Vector2f(padding, size + padding);
+
+	// Store the button size for other classes
+	LayoutInfo::ButtonSize = buttonSize;
 
 	// TODO: Don't use scopes like this
 	// Cursor tool
@@ -116,20 +129,8 @@ void Toolbar::CreateToolsAndButtons(float size)
 		uiElements.push_back(button);
 		tools.push_back(tool);
 	}
-
-	// Color picker button thing
-	{		
-		// Make the button and set its callback
-		Button* button = new Button(buttonSize, sf::Vector2f(), Utils::GetCanvas()->GetSelectedColor(), sf::Keyboard::Key::K);
-		button->SetCallback(ChangeColor(button));
-
-		// Chuck it in with the rest of the buttons
-		uiElements.push_back(button);
-
-		// Store the button because we need to resize it later
-		colorPickerButton = button;
-	}
 }
+
 
 
 std::function<void()> Toolbar::SetTool(Tool* tool)
@@ -145,19 +146,6 @@ std::function<void()> Toolbar::SetTool(Tool* tool)
 		currentTool->Select();
 
 		selectedToolText->setString(currentTool->GetName());
-	};
-}
-
-std::function<void()> Toolbar::ChangeColor(Button* colorPickerButton)
-{
-	return [this, colorPickerButton]()
-	{
-		// Get, then set the new color
-		sf::Color newColor = DialogueHandler::LaunchColorPicker(Utils::GetCanvas()->GetSelectedColor());
-		Utils::GetCanvas()->SetSelectedColor(newColor);
-
-		// Update the buttons color
-		colorPickerButton->SetBackgroundColor(newColor);
 	};
 }
 
@@ -184,17 +172,6 @@ void Toolbar::ResizeUi()
 	toolSelector.setSize(sf::Vector2f(
 		toolSelector.getSize().x,
 		(float)windowSize.y
-	));
-
-	// Get the padding for the color picker
-	// TODO: Don't reuse
-	sf::Vector2u screenSize = sf::VideoMode::getDesktopMode().size;
-	float padding = (screenSize.x / 30.0f) / 10.0f; 
-
-	// The color picker button is bottom-aligned
-	colorPickerButton->SetPosition(sf::Vector2f(
-		padding,
-		windowSize.y - padding - colorPickerButton->GetSize().y - padding
 	));
 }
 

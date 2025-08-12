@@ -41,14 +41,14 @@ Paint clone written with SFML and C++
   - [ ] Maintain proportions (no cropping/distortion)
   - [ ] Place multiple stamps in window
 - [ ] **Colour Dialog**
-  - [ ] Colour picker with gradient
+  - [x] Colour picker with gradient
   - [ ] Applies to all tools (except stamp, file save/load)
 
 ## Section 3: Project Technical Requirements
 - [ ] **Build Quality**
   - [x] Builds in Debug and Release with no warnings/errors at Level 3
   - [x] Include all source files and required external data
-- [ ] **Coding Standards**
+- [x] **Coding Standards**
   - [x] Clear, concise comments
   - [x] Good variable naming
   - [x] Minimise repetitive code

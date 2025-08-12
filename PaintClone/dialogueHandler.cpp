@@ -18,7 +18,7 @@ sf::Color DialogueHandler::LaunchColorPicker(sf::Color previousColor)
 	CHOOSECOLOR colorPicker;
 
 	// All of the sfml default colors
-	// TODO: Maybe don't put here
+	// TODO: Maybe don't define this here
 	static COLORREF presetColors[10] = {
 		Utils::sfmlColorToWin32(sf::Color::White),
 		Utils::sfmlColorToWin32(sf::Color::Black),
