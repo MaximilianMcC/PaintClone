@@ -1,9 +1,4 @@
 #include "toolbar.h"
-#include "dialogueHandler.h"
-#include "cursorTool.h"
-#include "rectangleTool.h"
-#include "circleTool.h"
-#include "lineTool.h"
 
 // TODO: Don't do this here idk. Put in utils
 float LayoutInfo::Padding;
@@ -129,6 +124,12 @@ void Toolbar::CreateToolsAndButtons()
 		uiElements.push_back(button);
 		tools.push_back(tool);
 	}
+
+	// Color picker
+	{
+		colorPicker = new ColorPicker();
+		uiElements.push_back(colorPicker);
+	}
 }
 
 
@@ -204,6 +205,8 @@ void Toolbar::CleanUp()
 	// Get rid of all the dynamically added ui elements
 	for (UiElement* uiElement : uiElements)
 	{
+		uiElement->CleanUp();
+		
 		delete uiElement;
 		uiElement = nullptr;
 	}

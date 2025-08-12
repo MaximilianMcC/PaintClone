@@ -5,7 +5,7 @@
 #include "button.h"
 #include "toolbar.h"
 
-class ColorPicker : public Thing
+class ColorPicker : public UiElement
 {
 private:
 	sf::Color fillColor;
@@ -15,9 +15,12 @@ private:
 	Button* outlineColorButton;
 
 public:
+	ColorPicker();
+
 	void Start() override;
 	virtual void HandleEvent(sf::Event &currentEvent) override;
 	void Draw() override;
+	void CleanUp() override;
 
 	sf::Color GetFillColor();
 	sf::Color GetOutlineColor();

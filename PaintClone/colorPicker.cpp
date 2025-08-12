@@ -1,5 +1,10 @@
 #include "colorPicker.h"
 
+ColorPicker::ColorPicker()
+{
+	Start();
+}
+
 void ColorPicker::Start()
 {
 	// Make the fill color button
@@ -33,6 +38,13 @@ void ColorPicker::HandleEvent(sf::Event &event)
 	fillColorButton->SetPosition(position);
 }
 
+void ColorPicker::Draw()
+{
+	// Render the buttons
+	fillColorButton->Draw();
+	outlineColorButton->Draw();
+}
+
 std::function<void()> ColorPicker::Pick(Button* colorPickerButton, sf::Color* colorToPick)
 {
 	return [this, colorPickerButton, colorToPick]()
@@ -44,4 +56,13 @@ std::function<void()> ColorPicker::Pick(Button* colorPickerButton, sf::Color* co
 		// Update the buttons color
 		colorPickerButton->SetBackgroundColor(newColor);
 	};
+}
+
+void ColorPicker::CleanUp()
+{
+	delete fillColorButton;
+	fillColorButton = nullptr;
+
+	delete outlineColorButton;
+	outlineColorButton = nullptr;
 }

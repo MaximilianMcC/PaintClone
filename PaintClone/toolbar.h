@@ -1,17 +1,26 @@
 #pragma once
 #include "thing.h"
+#include "colorPicker.h"
 #include "tool.h"
 #include "button.h"
 #include "imageButton.h"
+#include "dialogueHandler.h"
+#include "cursorTool.h"
+#include "rectangleTool.h"
+#include "circleTool.h"
+#include "lineTool.h"
+
+class ColorPicker;
 
 class Toolbar : public Thing
 {
 private:
 	sf::RectangleShape toolSelector;
 	sf::RectangleShape toolSettings;
-	
+
 	std::vector<UiElement*> uiElements;
 	std::vector<Tool*> tools;
+	ColorPicker colorPicker;
 	Tool* currentTool;
 
 	void CreateToolsAndButtons();
