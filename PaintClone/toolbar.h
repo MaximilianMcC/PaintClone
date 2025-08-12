@@ -1,6 +1,5 @@
 #pragma once
 #include "thing.h"
-#include "colorPicker.h"
 #include "tool.h"
 #include "button.h"
 #include "imageButton.h"
@@ -9,8 +8,7 @@
 #include "rectangleTool.h"
 #include "circleTool.h"
 #include "lineTool.h"
-
-class ColorPicker;
+#include "colorPicker.h"
 
 class Toolbar : public Thing
 {
@@ -20,7 +18,7 @@ private:
 
 	std::vector<UiElement*> uiElements;
 	std::vector<Tool*> tools;
-	ColorPicker colorPicker;
+	ColorPicker* colorPicker;
 	Tool* currentTool;
 
 	void CreateToolsAndButtons();

@@ -3,7 +3,6 @@
 #include "dialogueHandler.h"
 #include "utils.h"
 #include "button.h"
-#include "toolbar.h"
 
 class ColorPicker : public UiElement
 {
@@ -24,6 +23,8 @@ public:
 
 	sf::Color GetFillColor();
 	sf::Color GetOutlineColor();
+
+	void ResizeUi();
 
 	void SetFillColor();
 	void SetOutlineColor();

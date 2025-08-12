@@ -20,7 +20,7 @@ int main()
 	Colors::Theme = Colors::Light;
 
 	// Setup the SFML window
-	sf::RenderWindow window(sf::VideoMode(sf::Vector2u(854, 480)), "Paitning rn");
+	sf::RenderWindow window(sf::VideoMode(sf::Vector2u(1100, 700)), "Paitning rn");
 	window.setIcon(*AssetManager::LoadAndGetImage("icon", "./assets/icon.png"));
 	bool debug = true;
 
@@ -58,7 +58,7 @@ int main()
 			if (event->is<sf::Event::Closed>())
 			{
 				//TODO: Ask if they wanna save
-				if (DialogueHandler::ConfirmSaveMessageBox())
+				// if (DialogueHandler::ConfirmSaveMessageBox())
 				{
 				}
 				std::cout << "save the file here ty" << std::endl;

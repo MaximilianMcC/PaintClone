@@ -1,4 +1,5 @@
 #include "colorPicker.h"
+#include "toolbar.h"
 
 ColorPicker::ColorPicker()
 {
@@ -14,15 +15,20 @@ void ColorPicker::Start()
 	// Make the outline color button
 	outlineColorButton = new Button(LayoutInfo::ButtonSize, sf::Vector2f(), outlineColor);
 	outlineColorButton->SetCallback(Pick(outlineColorButton, &outlineColor));
+
+	ResizeUi();
 }
 
 void ColorPicker::HandleEvent(sf::Event &event)
 {
 	// Check for if we've resized the window
-	if (event.is<sf::Event::Resized>() == false) return; 
+	if (event.is<sf::Event::Resized>() == false) ResizeUi();
+}
 
+void ColorPicker::ResizeUi()
+{
 	// Get the new window size
-	float windowHeight = Utils::GetWindow()->getSize().y;
+	float windowHeight = (float)Utils::GetWindow()->getSize().y;
 
 	// Get the position of the bottom most button
 	sf::Vector2f position = sf::Vector2f(

@@ -18,7 +18,7 @@ void Toolbar::Start()
 	//? idk what percentage it actually is (bad at maths)
 	// TODO: No magic numbers
 	sf::Vector2u screenSize = sf::VideoMode::getDesktopMode().size;
-	LayoutInfo::BaseSize = screenSize.x / 30.0f;
+	LayoutInfo::BaseSize = screenSize.x / 40.0f;
 	LayoutInfo::Padding = LayoutInfo::BaseSize / 10.0f;
 
 	// Horizontal
@@ -152,6 +152,9 @@ std::function<void()> Toolbar::SetTool(Tool* tool)
 
 void Toolbar::HandleEvent(sf::Event& event)
 {
+	// TODO: Don't put here
+	colorPicker->HandleEvent(event);
+
 	// Resize the ui to accompany the window
 	if (event.is<sf::Event::Resized>()) ResizeUi();
 }
