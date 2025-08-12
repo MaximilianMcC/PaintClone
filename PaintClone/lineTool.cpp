@@ -11,8 +11,6 @@ void LineTool::ResizeShape(sf::Vector2f newSize)
 	// Get the rectangle as a line
 	sf::RectangleShape* line = static_cast<sf::RectangleShape*>(shape.get());
 
-	shape->setOrigin(sf::Vector2f(0.0f, (thickness / 2.0f)));
-
 	// Figure out what the length and angle
 	// need to be based on the mouse position
 	// TODO: Put this stuff in utils
