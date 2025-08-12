@@ -42,6 +42,7 @@ public:
 
 	static void PrintVector(sf::Vector2f vector);
 	static void PrintVector(sf::Vector2u vector);
+	static void PrintColor(sf::Color color);
 
 	static COLORREF sfmlColorToWin32(sf::Color color);
 	static sf::Color Win32ColorToSfml(COLORREF color);
