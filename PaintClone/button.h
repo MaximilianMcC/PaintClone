@@ -28,4 +28,9 @@ public:
 	bool IsClicked();
 	bool IsHeld();
 	bool IsHovered();
+
+	void SetBackgroundColor(sf::Color newColor);
+	void SetPosition(sf::Vector2f newPosition);
+
+	sf::Vector2f GetSize();
 };

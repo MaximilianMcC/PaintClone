@@ -78,3 +78,18 @@ void Button::SetCallback(std::function<void()> methodToCall)
 {
 	callbackFunction = methodToCall;
 }
+
+void Button::SetBackgroundColor(sf::Color newColor)
+{
+	shape.setFillColor(newColor);
+}
+
+void Button::SetPosition(sf::Vector2f newPosition)
+{
+	shape.setPosition(newPosition);
+}
+
+sf::Vector2f Button::GetSize()
+{
+	return shape.getSize();
+}
