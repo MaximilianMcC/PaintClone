@@ -4,6 +4,7 @@
 #include <vector>
 #include "utils.h"
 #include "colors.h"
+#include "dialogueHandler.h"
 
 // Things
 #include "canvas.h"
@@ -56,6 +57,12 @@ int main()
 			// Check for if we wanna close the window
 			if (event->is<sf::Event::Closed>())
 			{
+				//TODO: Ask if they wanna save
+				if (DialogueHandler::ConfirmSaveMessageBox())
+				{
+				}
+				std::cout << "save the file here ty" << std::endl;
+				
 				window.close();
 				continue;
 			}
