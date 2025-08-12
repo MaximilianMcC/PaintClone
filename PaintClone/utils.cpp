@@ -14,6 +14,8 @@ sf::Cursor::Type Utils::previousCursor = sf::Cursor::Type::Arrow;
 bool Utils::usingTemporaryCursor = false;
 sf::Cursor::Type Utils::temporaryCursor;
 
+ColorPicker* Utils::colorPicker;
+
 ColorTheme Colors::Theme = Colors::Light;
 
 
@@ -115,6 +117,16 @@ void Utils::ResetCursor()
 {
 	SetCursor(sf::Cursor::Type::Arrow);
 	usingTemporaryCursor = false;
+}
+
+void Utils::SetColorPicker(ColorPicker* newColorPicker)
+{
+	colorPicker = newColorPicker;
+}
+
+ColorPicker* Utils::GetColorPicker()
+{
+	return colorPicker;
 }
 
 

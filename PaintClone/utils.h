@@ -5,6 +5,7 @@
 
 // Stop circular dependncy stuff
 class Canvas;
+class ColorPicker;
 
 // TODO: Get rid of this class and do it in utils
 // TODO: Write this stuff in cpp files. Gotten too large (cursor)
@@ -16,6 +17,8 @@ private:
 	static sf::RenderWindow* window;
 
 	static Canvas* mainCanvas;
+
+	static ColorPicker* colorPicker;
 
 	static sf::Cursor::Type currentCursor;
 	static sf::Cursor::Type previousCursor;
@@ -39,6 +42,9 @@ public:
 	static void SetCursor(sf::Cursor::Type cursorType, bool temporary = false, bool force = true);
 	static void SetCursorToPrevious();
 	static void ResetCursor();
+
+	static void SetColorPicker(ColorPicker* newColorPicker);
+	static ColorPicker* GetColorPicker();
 
 	static void PrintVector(sf::Vector2f vector);
 	static void PrintVector(sf::Vector2u vector);

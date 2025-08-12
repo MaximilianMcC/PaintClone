@@ -17,6 +17,7 @@ public:
 	ColorPicker();
 
 	void Start() override;
+	void Update() override;
 	virtual void HandleEvent(sf::Event &currentEvent) override;
 	void Draw() override;
 	void CleanUp() override;

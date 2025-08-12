@@ -2,6 +2,7 @@
 #include "canvas.h"
 #include "ShapeTool.h"
 #include "tool.h"
+#include "colorPicker.h"
 
 class ShapeTool : public Tool
 {

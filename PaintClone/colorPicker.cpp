@@ -8,15 +8,23 @@ ColorPicker::ColorPicker()
 
 void ColorPicker::Start()
 {
+	Utils::SetColorPicker(this);
+
 	// Make the fill color button
-	fillColorButton = new Button(LayoutInfo::ButtonSize, sf::Vector2f(), fillColor);
+	fillColorButton = new Button(LayoutInfo::ButtonSize, sf::Vector2f(), fillColor, sf::Keyboard::Key::L);
 	fillColorButton->SetCallback(Pick(fillColorButton, &fillColor));
 
 	// Make the outline color button
-	outlineColorButton = new Button(LayoutInfo::ButtonSize, sf::Vector2f(), outlineColor);
+	outlineColorButton = new Button(LayoutInfo::ButtonSize, sf::Vector2f(), outlineColor, sf::Keyboard::Key::O);
 	outlineColorButton->SetCallback(Pick(outlineColorButton, &outlineColor));
 
 	ResizeUi();
+}
+
+void ColorPicker::Update()
+{
+	fillColorButton->Update();
+	outlineColorButton->Update();
 }
 
 void ColorPicker::HandleEvent(sf::Event &event)
@@ -71,4 +79,14 @@ void ColorPicker::CleanUp()
 
 	delete outlineColorButton;
 	outlineColorButton = nullptr;
+}
+
+sf::Color ColorPicker::GetFillColor()
+{
+	return fillColor;
+}
+
+sf::Color ColorPicker::GetOutlineColor()
+{
+	return outlineColor;
 }

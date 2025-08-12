@@ -46,8 +46,8 @@ void ShapeTool::Update()
 		// Actually make the shape
 		MakeNewShape();
 		shape->setPosition(mousePosition);
-		shape->setFillColor(Utils::GetCanvas()->GetSelectedColor());
-		shape->setOutlineColor(sf::Color::Red);
+		shape->setFillColor(Utils::GetColorPicker()->GetFillColor());
+		shape->setOutlineColor(Utils::GetColorPicker()->GetOutlineColor());
 	}
 
 	// Get the new size of the shape from the mouse position
