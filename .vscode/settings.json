@@ -32,6 +32,7 @@
 		"xstring": "cpp",
 		"string": "cpp",
 		"functional": "cpp",
-		"optional": "cpp"
+		"optional": "cpp",
+		"memory": "cpp"
 	}
 }
