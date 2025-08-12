@@ -114,3 +114,13 @@ sf::RenderTexture* Canvas::GetWorkingCanvas()
 {
 	return &workingRenderTexture;
 };
+
+sf::Color Canvas::GetSelectedColor()
+{
+	return selectedColor;	
+}
+
+void Canvas::SetSelectedColor(sf::Color newColor)
+{
+	selectedColor = newColor;
+}

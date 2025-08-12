@@ -16,6 +16,9 @@ private:
 	void Zoom(float delta);
 	void Pan(float xDelta, float yDelta);
 
+	// TODO: Don't store this here (toolbar or something maybe)
+	sf::Color selectedColor;
+
 public:
 	Canvas();
 	void Start() override;
@@ -28,4 +31,7 @@ public:
 
 	sf::RenderTexture* GetDisplayCanvas();
 	sf::RenderTexture* GetWorkingCanvas();
+
+	sf::Color GetSelectedColor();
+	void SetSelectedColor(sf::Color newColor);
 };
