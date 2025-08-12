@@ -2,6 +2,7 @@
 #include "tool.h"
 #include "shapeTool.h"
 #include "slider.h"
+#include "toolbar.h"
 
 class LineTool : public ShapeTool
 {

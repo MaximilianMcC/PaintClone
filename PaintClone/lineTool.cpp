@@ -4,7 +4,8 @@
 void LineTool::Start()
 {
 	// Make the slider (settings)
-	slider = Slider(&thickness, sf::Vector2f(30, 20), 200.0f, "erhm");
+	// TODO: Don't do the y maths and make origin respect text
+	slider = Slider(&thickness, sf::Vector2f(LayoutInfo::BaseSize + LayoutInfo::Padding, LayoutInfo::BaseSize / 3.0f), 200.0f, "Thickness");
 }
 
 void LineTool::MakeNewShape()
