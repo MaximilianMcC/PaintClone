@@ -17,7 +17,7 @@ private:
 	void Pan(float xDelta, float yDelta);
 
 	// TODO: Don't store this here (toolbar or something maybe)
-	sf::Color selectedColor;
+	sf::Color selectedColor = sf::Color::Red;
 
 public:
 	Canvas();

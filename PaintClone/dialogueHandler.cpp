@@ -46,7 +46,7 @@ sf::Color DialogueHandler::LaunchColorPicker(sf::Color previousColor)
 	colorPicker.Flags = CC_FULLOPEN | CC_RGBINIT | CC_ANYCOLOR | CC_PREVENTFULLOPEN;
 
 	// Return the selected color, otherwise whatever the previous one was
-	if (ChooseColor(&colorPicker)) return previousColor;
+	if (ChooseColor(&colorPicker) == false) return previousColor;
 	return Utils::Win32ColorToSfml(colorPicker.rgbResult);
 }
 

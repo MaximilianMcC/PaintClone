@@ -46,7 +46,7 @@ void ShapeTool::Update()
 		// Actually make the shape
 		MakeNewShape();
 		shape->setPosition(mousePosition);
-		shape->setFillColor(sf::Color::Magenta);
+		shape->setFillColor(Utils::GetCanvas()->GetSelectedColor());
 		shape->setOutlineColor(sf::Color::Red);
 	}
 
