@@ -9,6 +9,7 @@ class Toolbar : public Thing
 private:
 	sf::RectangleShape toolSelector;
 	sf::RectangleShape toolSettings;
+	Button* colorPickerButton;
 	
 	std::vector<UiElement*> uiElements;
 	std::vector<Tool*> tools;
@@ -28,5 +29,7 @@ public:
 	void CleanUp() override;
 
 	void ResizeUi();
+
 	std::function<void()> SetTool(Tool* tool);
+	std::function<void()> ChangeColor(Button* colorPickerButton);
 };

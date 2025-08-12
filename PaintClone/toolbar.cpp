@@ -1,4 +1,5 @@
 #include "toolbar.h"
+#include "dialogueHandler.h"
 #include "cursorTool.h"
 #include "rectangleTool.h"
 #include "circleTool.h"
@@ -29,11 +30,11 @@ void Toolbar::Start()
 	toolSettings.setFillColor(Colors::Theme.BackgroundDark);
 	toolSelector.setFillColor(Colors::Theme.BackgroundLight);
 
-	// Set their initial dynamic sizes
-	ResizeUi();
-
 	// Make all the buttons and tools
 	CreateToolsAndButtons(size);
+
+	// Set initial dynamic sizes
+	ResizeUi();
 
 	// TODO: Don't do this emplace thing
 	selectedToolText.emplace(*AssetManager::GetFont("arial"), currentTool->GetName(), 16u);
@@ -101,7 +102,7 @@ void Toolbar::CreateToolsAndButtons(float size)
 		tools.push_back(tool);
 	}
 
-	// Circle tool
+	// Line tool
 	{
 		LineTool* tool = new LineTool("Line", "Click and drag to resize");
 		ImageButton* button = new ImageButton("./assets/line.png", buttonSize, position, sf::Keyboard::Key::S);
@@ -114,6 +115,19 @@ void Toolbar::CreateToolsAndButtons(float size)
 		// place them in the lists
 		uiElements.push_back(button);
 		tools.push_back(tool);
+	}
+
+	// Color picker button thing
+	{		
+		// Make the button and set its callback
+		Button* button = new Button(buttonSize, sf::Vector2f(), Utils::GetCanvas()->GetSelectedColor(), sf::Keyboard::Key::K);
+		button->SetCallback(ChangeColor(button));
+
+		// Chuck it in with the rest of the buttons
+		uiElements.push_back(button);
+
+		// Store the button because we need to resize it later
+		colorPickerButton = button;
 	}
 }
 
@@ -131,6 +145,19 @@ std::function<void()> Toolbar::SetTool(Tool* tool)
 		currentTool->Select();
 
 		selectedToolText->setString(currentTool->GetName());
+	};
+}
+
+std::function<void()> Toolbar::ChangeColor(Button* colorPickerButton)
+{
+	return [this, colorPickerButton]()
+	{
+		// Get, then set the new color
+		sf::Color newColor = DialogueHandler::LaunchColorPicker(Utils::GetCanvas()->GetSelectedColor());
+		Utils::GetCanvas()->SetSelectedColor(newColor);
+
+		// Update the buttons color
+		colorPickerButton->SetBackgroundColor(newColor);
 	};
 }
 
@@ -157,6 +184,17 @@ void Toolbar::ResizeUi()
 	toolSelector.setSize(sf::Vector2f(
 		toolSelector.getSize().x,
 		(float)windowSize.y
+	));
+
+	// Get the padding for the color picker
+	// TODO: Don't reuse
+	sf::Vector2u screenSize = sf::VideoMode::getDesktopMode().size;
+	float padding = (screenSize.x / 30.0f) / 10.0f; 
+
+	// The color picker button is bottom-aligned
+	colorPickerButton->SetPosition(sf::Vector2f(
+		padding,
+		windowSize.y - padding - colorPickerButton->GetSize().y - padding
 	));
 }
 
