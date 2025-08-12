@@ -151,6 +151,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="rectangleTool.cpp" />
     <ClCompile Include="ShapeTool.cpp" />
+    <ClCompile Include="slider.cpp" />
     <ClCompile Include="tool.cpp" />
     <ClCompile Include="toolbar.cpp" />
     <ClCompile Include="utils.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="imageButton.h" />
     <ClInclude Include="lineTool.h" />
     <ClInclude Include="ShapeTool.h" />
+    <ClInclude Include="slider.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="rectangleTool.h" />
     <ClInclude Include="thing.h" />

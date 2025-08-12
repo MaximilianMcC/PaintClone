@@ -84,6 +84,9 @@
     <ClCompile Include="colorPicker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="slider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="canvas.h">
@@ -135,6 +138,9 @@
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="colorPicker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="slider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

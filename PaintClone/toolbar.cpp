@@ -130,6 +130,9 @@ void Toolbar::CreateToolsAndButtons()
 		colorPicker = new ColorPicker();
 		uiElements.push_back(colorPicker);
 	}
+
+	// Start all tools
+	for (Tool* tool : tools) tool->Start();
 }
 
 
