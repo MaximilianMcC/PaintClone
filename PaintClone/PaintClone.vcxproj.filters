@@ -78,6 +78,9 @@
     <ClCompile Include="dialogueHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="lineTool.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="canvas.h">
@@ -124,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="dialogueHandler.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lineTool.h">
+      <Filter>Header Files\Tools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

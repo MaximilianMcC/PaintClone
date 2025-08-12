@@ -146,6 +146,7 @@
     <ClCompile Include="cursorTool.cpp" />
     <ClCompile Include="dialogueHandler.cpp" />
     <ClCompile Include="imageButton.cpp" />
+    <ClCompile Include="lineTool.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="rectangleTool.cpp" />
     <ClCompile Include="ShapeTool.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="cursorTool.h" />
     <ClInclude Include="dialogueHandler.h" />
     <ClInclude Include="imageButton.h" />
+    <ClInclude Include="lineTool.h" />
     <ClInclude Include="ShapeTool.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="rectangleTool.h" />

@@ -2,6 +2,7 @@
 #include "cursorTool.h"
 #include "rectangleTool.h"
 #include "circleTool.h"
+#include "lineTool.h"
 
 Toolbar::Toolbar()
 {
@@ -72,7 +73,7 @@ void Toolbar::CreateToolsAndButtons(float size)
 
 	// Rectangle tool
 	{
-		RectangleTool* tool = new RectangleTool("Rectangle", "Click and drag to resize");
+		RectangleTool* tool = new RectangleTool("Rectangle", "Click and drag to resize. Hold shift to lock aspect ratio");
 		ImageButton* button = new ImageButton("./assets/rectangle.png", buttonSize, position, sf::Keyboard::Key::R);
 		button->SetCallback(SetTool(tool));
 
@@ -87,8 +88,23 @@ void Toolbar::CreateToolsAndButtons(float size)
 
 	// Circle tool
 	{
-		CircleTool* tool = new CircleTool("Circle", "Click and drag to resize");
+		CircleTool* tool = new CircleTool("Circle", "Click and drag to resize. Hold shift to lock aspect ratio");
 		ImageButton* button = new ImageButton("./assets/circle.png", buttonSize, position, sf::Keyboard::Key::C);
+		button->SetCallback(SetTool(tool));
+
+		// Move the button down a bit
+		position.y += padding + buttonDimension;
+
+		// Make coppies of the two things and
+		// place them in the lists
+		uiElements.push_back(button);
+		tools.push_back(tool);
+	}
+
+	// Circle tool
+	{
+		LineTool* tool = new LineTool("Line", "Click and drag to resize");
+		ImageButton* button = new ImageButton("./assets/line.png", buttonSize, position, sf::Keyboard::Key::S);
 		button->SetCallback(SetTool(tool));
 
 		// Move the button down a bit
