@@ -22,15 +22,11 @@ int main()
 	// Setup the SFML window
 	sf::RenderWindow window(sf::VideoMode(sf::Vector2u(1100, 700)), "Paitning rn");
 	window.setIcon(*AssetManager::LoadAndGetImage("icon", "./assets/icon.png"));
-	bool debug = true;
 
 	// Delta time setup
 	float deltaTime = 0.0f;
 	sf::Clock deltaTimeClock = sf::Clock();
 
-	// Fps setup
-	float fps = 0.0f;
-	sf::Text fpsCounter = sf::Text(*AssetManager::GetFont("arial"));
 
 	// Share data with whoever's keen
 	Utils::Init(&deltaTime, &window);
@@ -48,8 +44,6 @@ int main()
 		// Calculate delta time and fps
 		//? Since a pointer was given we don't need to bother updating it
 		deltaTime = deltaTimeClock.restart().asSeconds();
-		fps = 1 / deltaTime;
-		fpsCounter.setString(std::to_string((int)fps) + " fps");
 
 		// Check for new events
 		while (const std::optional event = window.pollEvent())
@@ -99,7 +93,6 @@ int main()
 		{
 			for (Thing* thing : things) thing->Draw();
 		}
-		if (debug) window.draw(fpsCounter);
 		window.display();
 	}
 
