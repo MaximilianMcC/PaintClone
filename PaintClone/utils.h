@@ -1,3 +1,15 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2025 Media Design School
+File Name : utils
+Description : random utility stuff. mostly used for sharing stuff
+Author : Maximilian Oscar Jack McCarthy
+Mail : maximilian.mccarthy@mds.ac.nz
+**************************************************************************/
+
 #pragma once
 #include "SFML/Graphics.hpp"
 #include <iostream>

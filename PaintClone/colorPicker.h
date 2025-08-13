@@ -1,3 +1,15 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2025 Media Design School
+File Name : colorPicker
+Description : stores colors
+Author : Maximilian Oscar Jack McCarthy
+Mail : maximilian.mccarthy@mds.ac.nz
+**************************************************************************/
+
 #pragma once
 #include "thing.h"
 #include "dialogueHandler.h"

@@ -1,3 +1,15 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2025 Media Design School
+File Name : thing
+Description : everything is a thing
+Author : Maximilian Oscar Jack McCarthy
+Mail : maximilian.mccarthy@mds.ac.nz
+**************************************************************************/
+
 #pragma once
 #include <iostream>
 #include <functional>
