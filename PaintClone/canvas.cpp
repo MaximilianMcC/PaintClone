@@ -8,8 +8,17 @@ Canvas::Canvas()
 void Canvas::Start()
 {
 	// Default canvas size
-	canvasSize = sf::Vector2f(1920, 1080);
-	
+	SetupCanvas(sf::Vector2u(1920, 1080));
+
+	// Sharing is caring
+	Utils::SetCanvas(this);
+}
+
+void Canvas::SetupCanvas(sf::Vector2u size)
+{
+	// Set the size
+	canvasSize = static_cast<sf::Vector2f>(size);
+
 	// Camera setup (so we can pan and zoom & whatnot)
 	camera.setSize(canvasSize);
 	camera.setCenter(canvasSize / 2.0f);
@@ -26,9 +35,6 @@ void Canvas::Start()
 	// Add a default background color
 	displayRenderTexture.clear(sf::Color::White);
 	displayRenderTexture.display();
-
-	// Sharing is caring
-	Utils::SetCanvas(this);
 }
 
 void Canvas::Draw()
@@ -42,6 +48,33 @@ void Canvas::Draw()
 	}
 	// Return to the 'normal' camera
 	Utils::GetWindow()->setView(previousView);
+}
+
+void Canvas::Update()
+{
+	// Check for if we press ctrl+o to open a file
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::O))
+	{
+		// Get the path to the file
+		std::string path = DialogueHandler::LaunchOpenFileDialogue();
+		
+		// Load the image
+		sf::Texture texture;
+		if (texture.loadFromFile(path) == false)
+		{
+			std::cout << "erhm wrong file path" << std::endl;
+			return;
+		}
+		
+		// Make the image into a sprite
+		sf::Sprite sprite = sf::Sprite(texture);
+
+		// Set the canvas size to match the image
+		SetupCanvas(texture.getSize());
+
+		// Place the image on the canvas
+		displayRenderTexture.draw(sprite);
+	}
 }
 
 // TODO: Don't put event definitions in the if statement

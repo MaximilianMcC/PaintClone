@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "thing.h"
+#include "dialogueHandler.h"
 
 class Canvas : public Thing
 {
@@ -22,8 +23,11 @@ private:
 public:
 	Canvas();
 	void Start() override;
+	void Update() override;
 	void HandleEvent(sf::Event &event);
 	void Draw() override;
+
+	void SetupCanvas(sf::Vector2u size);
 
 	// Get the mouse position relative to the canvas
 	//? Returns false if the mouse is not on the canvas
