@@ -12,20 +12,20 @@ Paint clone written with SFML and C++
 # Feature Checklist
 
 ## Section 1: Basic Features
-- [ ] **Mouse-based drawing**
-  - [ ] Draw shapes with the mouse (Box, Ellipse, Line)
+- [x] **Mouse-based drawing**
+  - [x] Draw shapes with the mouse (Box, Ellipse, Line)
   - [x] Click-and-hold drawing (no 'placing' shapes)
   - [x] Shapes resize while holding mouse button (scale from top left)
   - [x] Shapes persist after being drawn
-- [ ] **Required Shapes**
+- [x] **Required Shapes**
   - [x] Box
   - [x] Ellipse
-  - [ ] Line (adjustable thickness)
+  - [x] Line (adjustable thickness)
 - [ ] **Menu Options**
   - [x] Change current tool (Box, Ellipse, Line)
-  - [ ] Change fill colour (any `sf::Color` basic colour)
+  - [x] Change fill colour (any `sf::Color` basic colour)
   - [ ] Change width of selected tool  
-    - [ ] Applies to line thickness  
+    - [x] Applies to line thickness  
     - [ ] Applies to outline thickness for other shapes
 
 ## Section 2: Advanced Features
@@ -53,8 +53,8 @@ Paint clone written with SFML and C++
   - [x] Good variable naming
   - [x] Minimise repetitive code
   - [x] Clear logic flow
-- [ ] **Runtime Quality**
-  - [ ] No memory leaks
+- [x] **Runtime Quality**
+  - [x] No memory leaks
   - [ ] No bugs
   - [x] No crashes
 - [x] **Technical Features**
@@ -76,9 +76,5 @@ Paint clone written with SFML and C++
 - [ ] **Submission**
   - [ ] Submit via MyLearn as `.zip` file
 
-## Section 5: Assessment Criteria (Self-Check)
-- [ ] Basic features complete and functional
-- [ ] Advanced features implemented
-- [ ] High coding standards met
-- [ ] Solution builds without modification
-- [ ] Build is stable, complete, and well-structured
+# Submission
+I spent all my time adding additional features so I had no time to properly add all the basic and advanced features. I'm not really happy with how this thing turned out. Like 90% of the errors from this were fighting with the compiler/language, not the logic. I do not like cpp. 
